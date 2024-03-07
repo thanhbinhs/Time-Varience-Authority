@@ -1,7 +1,7 @@
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tva_the_time_variance_authority_ver2/src/controller.dart';
-import 'package:tva_the_time_variance_authority_ver2/src/notifications.dart';
+import 'package:tva/src/controller.dart';
+import 'package:tva/src/notifications.dart';
 
 /// A widget that forces the [Slidable] widgets below it to close when another
 /// [Slidable] widget with the same [groupTag] opens.

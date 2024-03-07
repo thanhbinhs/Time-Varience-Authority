@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tva_the_time_variance_authority_ver2/Widgets/Routine/AddNewTaskPageWidget/AddNewTakPage.dart';
+import 'package:tva/Widgets/Routine/AddNewTaskPageWidget/AddNewTakPage.dart';
 import '../Widgets/Routine/ListTaskWidget/ListTaskWidget.dart';
 import 'VariablesDataClass.dart';
 

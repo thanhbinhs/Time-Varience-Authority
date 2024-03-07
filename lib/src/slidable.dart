@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tva_the_time_variance_authority_ver2/src/auto_close_behavior.dart';
-import 'package:tva_the_time_variance_authority_ver2/src/notifications_old.dart';
+import 'package:tva/src/auto_close_behavior.dart';
+import 'package:tva/src/notifications_old.dart';
 
 import 'action_pane_configuration.dart';
 import 'controller.dart';

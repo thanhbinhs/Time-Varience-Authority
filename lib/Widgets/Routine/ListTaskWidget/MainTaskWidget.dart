@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tva_the_time_variance_authority_ver2/src/action_pane_motions.dart';
-import 'package:tva_the_time_variance_authority_ver2/src/actions.dart';
-import 'package:tva_the_time_variance_authority_ver2/src/slidable.dart';
+import 'package:tva/src/action_pane_motions.dart';
+import 'package:tva/src/actions.dart';
+import 'package:tva/src/slidable.dart';
 import '../VariablesDataRoutineClass.dart';
 
 class MainTaskWidget extends StatelessWidget{

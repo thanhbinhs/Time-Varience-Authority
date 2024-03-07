@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tva_the_time_variance_authority_ver2/Widgets/Routine/VariablesDataRoutineClass.dart';
+import 'package:tva/Widgets/Routine/VariablesDataRoutineClass.dart';
 
 
 void AddNewTaskPageVer1(BuildContext context) {

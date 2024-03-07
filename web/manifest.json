@@ -1,6 +1,6 @@
 {
-    "name": "tva_the_time_variance_authority_ver2",
-    "short_name": "tva_the_time_variance_authority_ver2",
+    "name": "tva",
+    "short_name": "tva",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
