@@ -1,78 +1,34 @@
 {
   "project_info": {
-    "project_number": "1030738894261",
-    "firebase_url": "https://time-varience-authority-49dcd-default-rtdb.firebaseio.com",
-    "project_id": "time-varience-authority-49dcd",
-    "storage_bucket": "time-varience-authority-49dcd.appspot.com"
+    "project_number": "740226785044",
+    "project_id": "time-varience-authority-f504c",
+    "storage_bucket": "time-varience-authority-f504c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1030738894261:android:6c4ab0472f39df1a9b4dfc",
+        "mobilesdk_app_id": "1:740226785044:android:5217d2d97fa0163b1f6c01",
         "android_client_info": {
           "package_name": "com.example.tva"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1030738894261-cc3h564poqns4m2i503aff3iclq0afg2.apps.googleusercontent.com",
+          "client_id": "740226785044-b65e9fvm2b13lpvvdq21uajknccshag7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDPe9RiaKULhNUpAiiVlBeoSVkB03ZlFRo"
+          "current_key": "AIzaSyAHrXpap8NpQEjiyTDFrITAZVIBgvzgzVA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1030738894261-cc3h564poqns4m2i503aff3iclq0afg2.apps.googleusercontent.com",
+              "client_id": "740226785044-b65e9fvm2b13lpvvdq21uajknccshag7.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "1030738894261-nh0acdnrb3ov7ie2d88fqctd1tgha2dd.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.tvaTimeVarienceAuthority.RunnerTests"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1030738894261:android:2569dd8c2122abd09b4dfc",
-        "android_client_info": {
-          "package_name": "com.example.tva_time_varience_authority"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1030738894261-cc3h564poqns4m2i503aff3iclq0afg2.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDPe9RiaKULhNUpAiiVlBeoSVkB03ZlFRo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1030738894261-cc3h564poqns4m2i503aff3iclq0afg2.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1030738894261-nh0acdnrb3ov7ie2d88fqctd1tgha2dd.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.tvaTimeVarienceAuthority.RunnerTests"
-              }
             }
           ]
         }

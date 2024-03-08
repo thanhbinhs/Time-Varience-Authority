@@ -73,6 +73,8 @@ flutter:
   assets:
     - assets/RiveAssets/Icons.riv
     - assets/Images/123.jpg
+    - assets/Images/apple.png
+    - assets/Images/google.png
 
   #   - images/a_dot_ham.jpeg
 

@@ -44,43 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBjumnGQ_Ic78rNDzB_vOBFO2sRdr2rn0k',
-    appId: '1:1030738894261:web:6e5b6fe2fe132a5f9b4dfc',
-    messagingSenderId: '1030738894261',
-    projectId: 'time-varience-authority-49dcd',
-    authDomain: 'time-varience-authority-49dcd.firebaseapp.com',
-    databaseURL: 'https://time-varience-authority-49dcd-default-rtdb.firebaseio.com',
-    storageBucket: 'time-varience-authority-49dcd.appspot.com',
+    apiKey: 'AIzaSyBJOWFQHBpOjL4396GmzTnARbfQ8fh0TDw',
+    appId: '1:740226785044:web:bcc2d113585b0ed41f6c01',
+    messagingSenderId: '740226785044',
+    projectId: 'time-varience-authority-f504c',
+    authDomain: 'time-varience-authority-f504c.firebaseapp.com',
+    storageBucket: 'time-varience-authority-f504c.appspot.com',
+
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDPe9RiaKULhNUpAiiVlBeoSVkB03ZlFRo',
-    appId: '1:1030738894261:android:6c4ab0472f39df1a9b4dfc',
-    messagingSenderId: '1030738894261',
-    projectId: 'time-varience-authority-49dcd',
-    databaseURL: 'https://time-varience-authority-49dcd-default-rtdb.firebaseio.com',
-    storageBucket: 'time-varience-authority-49dcd.appspot.com',
+    apiKey: 'AIzaSyAHrXpap8NpQEjiyTDFrITAZVIBgvzgzVA',
+    appId: '1:740226785044:android:5217d2d97fa0163b1f6c01',
+    messagingSenderId: '740226785044',
+    projectId: 'time-varience-authority-f504c',
+    storageBucket: 'time-varience-authority-f504c.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB5Pn2RGEikYMD8uzhz8cllrbW4eHuUdQE',
-    appId: '1:1030738894261:ios:d235abe10d9b1fc19b4dfc',
-    messagingSenderId: '1030738894261',
-    projectId: 'time-varience-authority-49dcd',
-    databaseURL: 'https://time-varience-authority-49dcd-default-rtdb.firebaseio.com',
-    storageBucket: 'time-varience-authority-49dcd.appspot.com',
-    iosClientId: '1030738894261-pa46l8qpapjfshbk76n037tohia6g3l4.apps.googleusercontent.com',
+    apiKey: 'AIzaSyD38q5VS_FhBtYf88XjL7zxUdcfpePUZGI',
+    appId: '1:740226785044:ios:9762181f2f679d201f6c01',
+    messagingSenderId: '740226785044',
+    projectId: 'time-varience-authority-f504c',
+    storageBucket: 'time-varience-authority-f504c.appspot.com',
+    iosClientId: '740226785044-1h1jrb2aim5jpjvui302ikobvne71rl5.apps.googleusercontent.com',
     iosBundleId: 'com.example.tva',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB5Pn2RGEikYMD8uzhz8cllrbW4eHuUdQE',
-    appId: '1:1030738894261:ios:31e8307369dd05b19b4dfc',
-    messagingSenderId: '1030738894261',
-    projectId: 'time-varience-authority-49dcd',
-    databaseURL: 'https://time-varience-authority-49dcd-default-rtdb.firebaseio.com',
-    storageBucket: 'time-varience-authority-49dcd.appspot.com',
-    iosClientId: '1030738894261-q8qn6nmn3igl8c3ulbv76olj6mjr14up.apps.googleusercontent.com',
+    apiKey: 'AIzaSyD38q5VS_FhBtYf88XjL7zxUdcfpePUZGI',
+    appId: '1:740226785044:ios:d702cc6c6d9096f21f6c01',
+    messagingSenderId: '740226785044',
+    projectId: 'time-varience-authority-f504c',
+    storageBucket: 'time-varience-authority-f504c.appspot.com',
+    iosClientId: '740226785044-onbjtrpkivnpft33vhfdvq7j0afai4uk.apps.googleusercontent.com',
     iosBundleId: 'com.example.tva.RunnerTests',
   );
 }
