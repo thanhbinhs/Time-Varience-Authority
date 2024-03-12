@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:google_sign_in/google_sign_in.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tva/Widgets/Routine/AddNewTaskPageWidget/AddTimePage.dart';
 import 'package:tva/Widgets/Routine/VariablesDataRoutineClass.dart';
 
 
@@ -7,7 +8,7 @@ void AddNewTaskPageVer1(BuildContext context) {
     isScrollControlled: true,
     context: context,
     builder: (context) {
-      return AddNewTaskPage(); // Replace YourWidget with the actual widget you want to display
+      return AddNewTaskPage();
     },
   );
 }
@@ -20,7 +21,9 @@ class AddNewTaskPage extends StatefulWidget{
 
 class _AddNewTaskPageState extends State<AddNewTaskPage> {
   Color colorTheme = Color.fromARGB(255, 255, 200, 223);
+  Color colorThemeGradient = Color.fromARGB(255, 255, 200, 223);
   List<bool> isPressedColorTheme = List.generate(7, (index) => false);
+
   int BurnIndex = 0;
 
 
@@ -44,7 +47,14 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
         height: screenHeight() - screenHeight()*0.08098,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: colorTheme,
+          gradient: LinearGradient(
+            colors: [
+              colorTheme,
+              colorThemeGradient,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -63,7 +73,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                         Navigator.pop(context);
                       });
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                       size: 25,
                       color: Colors.black,
@@ -73,7 +83,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                     onPressed: (){
                       // print(variableData.screenHeight());
                     },
-                    child: Text(
+                    child: const Text(
                       "Create",
                       style: TextStyle(
                         fontSize: 17,
@@ -139,6 +149,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                                     isPressedColorTheme = List.generate(7, (index) => false);
                                     isPressedColorTheme[i] = true;
                                     colorTheme = variableData.colorList[i];
+                                    colorThemeGradient = variableData.colorListGradient[i];
                                     BurnIndex = -1;
                                   });
                                 },
@@ -161,12 +172,12 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                                         color: variableData.colorList[i],
                                         border: Border.all(
                                             color: Colors.white,
-                                            width: 3
+                                            width: 3,
                                         ),
                                       ),
                                       child: Visibility(
                                         visible: isPressedColorTheme[i] || BurnIndex == i,
-                                        child: Center(
+                                        child: const Center(
                                           child: Icon(
                                             Icons.check,
                                             size: 25,
@@ -181,7 +192,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                         ),
                       ),
 
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
 
                       Container(
                         height: variableData.screenHeight() * 0.3064,
@@ -202,7 +213,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                                     Container(
                                       width: variableData.screenHeight() * 0.2616,
                                       // color: Colors.blue,
-                                      child: Row(
+                                      child:  Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Text(
@@ -221,7 +232,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          Icon(Icons.abc),
+                                          Icon(Icons.calendar_today),
                                         ],
                                       ),
                                     ),
@@ -236,7 +247,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
 
                             Padding(padding: EdgeInsets.symmetric(
                                 horizontal: 25,),
-                              child: Container(height: 1.5, color: Colors.grey,),
+                              child: Container(height: 1.5, color: Color.fromARGB(200, 200, 200, 200)),
                             ),
 
                             InkWell(
@@ -267,22 +278,20 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          Icon(Icons.abc),
+                                          Icon(Icons.alarm_rounded,size: 30,),
                                         ],
                                       ),
                                     ),
                                   ],
                                 ),
-
-
                               ),
                               onTap: (){
-
+                                AddTimePage(context);
                               },
                             ),
                             Padding(padding: EdgeInsets.symmetric(
                               horizontal: 25,),
-                              child: Container(height: 1.5, color: Colors.grey,),
+                              child: Container(height: 1.5,color: Color.fromARGB(200, 200, 200, 200),),
                             ),
                             InkWell(
                               child: Container(
@@ -312,7 +321,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          Icon(Icons.abc),
+                                          Icon(Icons.doorbell_outlined,size: 30,),
                                         ],
                                       ),
                                     ),
@@ -327,7 +336,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                             ),
                             Padding(padding: EdgeInsets.symmetric(
                               horizontal: 25,),
-                              child: Container(height: 1.5, color: Colors.grey,),
+                              child: Container(height: 1.5, color: Color.fromARGB(200, 200, 200, 200),),
                             ),
                             InkWell(
                               child: Container(
@@ -357,7 +366,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          Icon(Icons.abc),
+                                          Icon(Icons.discount_outlined,size: 30,),
                                         ],
                                       ),
                                     ),
@@ -373,45 +382,51 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10,),
-                      InkWell(
-                        child: Container(
-                          height: variableData.screenHeight() * 0.07475,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                            borderRadius: BorderRadius.circular(20)
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                width: variableData.screenHeight() * 0.07475,
-                                // color: Colors.green,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.abc),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: variableData.screenHeight() * 0.2927,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
+                      const SizedBox(height: 10,),
 
+                      // InkWell(
+                      //   child: Container(
+                      //     height: variableData.screenHeight() * 0.07475,
+                      //     decoration: BoxDecoration(
+                      //         color: Colors.white,
+                      //       borderRadius: BorderRadius.circular(20)
+                      //     ),
+                      //     child:
+                      //     Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+                      //         child: Row(
+                      //           mainAxisAlignment: MainAxisAlignment.start,
+                      //           children: [
+                      //             Container(
+                      //               width: 35,
+                      //               // color: Colors.green,
+                      //               child: Row(
+                      //                 mainAxisAlignment: MainAxisAlignment.start,
+                      //                 children: [
+                      //                   Icon(Icons.add_circle_outline_rounded,size:30),
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //             Container(
+                      //               width: 240,
+                      //               height: 70,
+                      //               color: Colors.yellow,
+                      //               child: Row(
+                      //                 mainAxisAlignment: MainAxisAlignment.start,
+                      //                 children: [
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //
+                      //
+                      //           ],
+                      //         ),
+                      //     ),
+                      //   ),
+                      //   onTap: (){
+                      //
+                      //   },
+                      // ),
 
-                                  ],
-                                ),
-                              ),
-
-                            ],
-                          ),
-                        ),
-                        onTap: (){
-
-                        },
-                      ),
                     ],
                   ),
                 ),

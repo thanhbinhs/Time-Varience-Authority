@@ -46,19 +46,7 @@ class _TimeTableWidgetState extends State<TimeTableWidget> {
     DateTime lastDayOfMonth = DateTime(now.year, now.month + 1, 0);
     int lastDayOfMonthAsInt = lastDayOfMonth.day;
 
-
-
-
     ScrollController _controller = ScrollController(initialScrollOffset:  (currentDateAsInt - 1) * (variableData.screenHeight()*0.05606 + 7 * 2 ));
-    void _scrollToContainer(int index) {
-      double offset = (index - 1) * (variableData.screenHeight()*0.05606 + 7 * 2 );
-      _controller.animateTo(
-        offset,
-        duration: Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
-
 
     return Container(
       height: variableData.screenHeight()*0.197,
@@ -85,7 +73,7 @@ class _TimeTableWidgetState extends State<TimeTableWidget> {
                   //'$_scrollPosition',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                    fontSize: 18,
                   ),
                 ),
                 Container(

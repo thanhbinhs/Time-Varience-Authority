@@ -26,7 +26,7 @@ android {
     namespace "com.example.tva"
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
-
+    ndkVersion "25.1.8937393"
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -45,9 +45,8 @@ android {
         applicationId "com.example.tva"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        ndkVersion "25.1.8937393"
-        minSdkVersion 20 // Example, your min SDK might be different
-        targetSdkVersion 30 // Example, your target SDK might be different
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -65,6 +64,4 @@ flutter {
     source '../..'
 }
 
-dependencies {
-    implementation 'androidx.multidex:multidex:2.0.1'
-}
+dependencies {}
