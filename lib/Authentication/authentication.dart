@@ -20,4 +20,15 @@ class AuthService {
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
+
+  signInWithApple() async {
+    final appleProvider = AppleAuthProvider();
+
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithPopup(appleProvider);
+    // Keep the authorization code returned from Apple platforms
+    String? authCode = userCredential.additionalUserInfo?.authorizationCode;
+    // Revoke Apple auth token
+    return await FirebaseAuth.instance.revokeTokenWithAuthorizationCode(authCode!);
+  }
+
 }

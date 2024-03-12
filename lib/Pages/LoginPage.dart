@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:tva/Authentication/authentication.dart';
 import 'package:tva/Components/ReusableWidget.dart';
 import 'package:tva/Pages/HomePageWidget.dart';
+import 'package:tva/Pages/LibraryWidget.dart';
 import 'package:tva/Pages/ResetPasswordPage.dart';
 import 'package:tva/Pages/SignupPage.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20),
+        padding: EdgeInsets.symmetric(vertical: 40),
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
@@ -65,15 +66,25 @@ class _LoginPageState extends State<LoginPage> {
                     child: forgetPassword(context),
                   ),
                   firebaseButton(context, "Sign In", () {
-                    FirebaseAuth.instance
-                        .signInWithEmailAndPassword(
-                        email: _email.text, password: _password.text)
-                        .then((value) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
-                    }).onError((error, stackTrace) {
-                      print("Error ${error.toString()}");
-                    });
+                    try {
+                      FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: _email.text, password: _password.text)
+                          .then((value) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      }).onError((error, stackTrace) {
+                        print("Error ${error.toString()}");
+                      });
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        print('No user found for that email.');
+                      } else if (e.code == 'wrong-password') {
+                        print('Wrong password provided for that user.');
+                      }
+                    }
                   }),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -101,11 +112,10 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       SquareTile(
                           onTap: () => AuthService().signInWithGoogle(),
-                          imagePath: 'assets/Images/google.png'
-                      ),
+                          imagePath: 'assets/Images/google.png'),
                       SizedBox(width: 25),
                       SquareTile(
-                          onTap: (){},
+                          onTap: () => AuthService().signInWithApple(),
                           imagePath: 'assets/Images/apple.png')
                     ],
                   ),

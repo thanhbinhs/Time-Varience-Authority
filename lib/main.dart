@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tva/Pages/AuthPage.dart';
 import 'package:tva/Pages/LoginPage.dart';
 import 'Pages/HomePageWidget.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,9 +21,11 @@ class MyApp extends StatelessWidget{
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFF5F5F3),
       ),
-      routes: {
-        "/" : (context) => LoginPage(),
-      },
+      home: LoginPage(),
+      // routes: {
+      //   "/" : (context) => AuthPage(),
+      //   // "/home": (context) => HomePage(),
+      // },
     );
   }
 }

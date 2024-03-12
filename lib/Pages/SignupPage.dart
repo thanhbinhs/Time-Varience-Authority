@@ -23,7 +23,6 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController _password = TextEditingController();
   TextEditingController _userName = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,29 +54,40 @@ class _SignupPageState extends State<SignupPage> {
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                     child: Column(
                       children: <Widget>[
-                        reusableTextField(
-                            "Username", CupertinoIcons.person, false, _userName),
+                        reusableTextField("Username", CupertinoIcons.person,
+                            false, _userName),
                         SizedBox(height: 10),
-                        reusableTextField("Email", Icons.email_outlined,
-                            false, _email),
+                        reusableTextField(
+                            "Email", Icons.email_outlined, false, _email),
                         SizedBox(height: 10),
                         reusableTextField("Password", CupertinoIcons.padlock,
                             true, _password),
                       ],
                     ),
                   ),
-                  firebaseButton(context, "Sign Up", (){
-                    FirebaseAuth.instance.
-                    createUserWithEmailAndPassword(
-                        email: _email.text,
-                        password: _password.text)
-                        .then((value){
-                      print("Created New Account");
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context)=> HomePage()));
-                    }).onError((error, stackTrace) {
-                      print("Error ${error.toString()}");
-                    });
+                  firebaseButton(context, "Sign Up", () {
+                    try {
+                      FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: _email.text, password: _password.text)
+                          .then((value) {
+                        print("Created New Account");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      }).onError((error, stackTrace) {
+                        print("Error ${error.toString()}");
+                      });
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password') {
+                        print('The password provided is too weak.');
+                      } else if (e.code == 'email-already-in-use') {
+                        print('The account already exists for that email.');
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
                   }),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -99,17 +109,16 @@ class _SignupPageState extends State<SignupPage> {
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 25),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SquareTile(
-                          onTap: ()=> AuthService().signInWithGoogle(),
+                          onTap: () => AuthService().signInWithGoogle(),
                           imagePath: 'assets/Images/google.png'),
                       SizedBox(width: 25),
                       SquareTile(
-                          onTap: (){},
+                          onTap: () => AuthService().signInWithApple(),
                           imagePath: 'assets/Images/apple.png')
                     ],
                   ),
