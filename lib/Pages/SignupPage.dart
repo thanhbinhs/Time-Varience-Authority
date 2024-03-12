@@ -56,10 +56,10 @@ class _SignupPageState extends State<SignupPage> {
                     child: Column(
                       children: <Widget>[
                         reusableTextField(
-                            "Username", CupertinoIcons.person, false, _email),
+                            "Username", CupertinoIcons.person, false, _userName),
                         SizedBox(height: 10),
                         reusableTextField("Email", Icons.email_outlined,
-                            true, _password),
+                            false, _email),
                         SizedBox(height: 10),
                         reusableTextField("Password", CupertinoIcons.padlock,
                             true, _password),
