@@ -10,6 +10,9 @@ import 'package:tva/Pages/ResetPasswordPage.dart';
 import 'package:tva/Pages/SignupPage.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:tva/main.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tva/Services/database_service.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -72,6 +75,7 @@ class _SignupPageState extends State<SignupPage> {
                               email: _email.text, password: _password.text)
                           .then((value) {
                         print("Created New Account");
+                        Database().saveUserInformation(_userName.text, _email.text);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

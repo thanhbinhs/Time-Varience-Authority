@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:tva/Services/database_service.dart';
 import 'package:tva/Widgets/Routine/AddNewTaskPageWidget/AddTimePage.dart';
 import 'package:tva/Widgets/Routine/VariablesDataRoutineClass.dart';
 
@@ -23,6 +27,12 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
   Color colorTheme = Color.fromARGB(255, 255, 200, 223);
   Color colorThemeGradient = Color.fromARGB(255, 255, 200, 223);
   List<bool> isPressedColorTheme = List.generate(7, (index) => false);
+  TextEditingController _taskName = TextEditingController();
+  TextEditingController _taskSub = TextEditingController();
+  // TextEditingController _taskStartTime = TextEditingController();
+  // TextEditingController _taskEndTime = TextEditingController();
+    final user = FirebaseAuth.instance.currentUser!;
+
 
   int BurnIndex = 0;
 
@@ -81,6 +91,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                   ),
                   TextButton(
                     onPressed: (){
+                      Database().addTask(user.uid, _taskName.text, _taskSub.text, Timestamp.now(), Timestamp.now(), false, BurnIndex);
                       // print(variableData.screenHeight());
                     },
                     child: const Text(
@@ -118,6 +129,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
 
                       TextField(
                         maxLines: null,
+                        controller: _taskName,
                         maxLength: 70,
                         textAlign: TextAlign.center,
                         style: TextStyle(

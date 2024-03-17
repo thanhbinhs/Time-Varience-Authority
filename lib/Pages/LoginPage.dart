@@ -9,6 +9,7 @@ import 'package:tva/Pages/LibraryWidget.dart';
 import 'package:tva/Pages/ResetPasswordPage.dart';
 import 'package:tva/Pages/SignupPage.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:tva/Widgets/Routine/ListTaskWidget/MainTaskWidget_v2.dart';
 import 'package:tva/main.dart';
 
 class LoginPage extends StatefulWidget {

@@ -88,7 +88,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               MainAxisAlignment.end,
                                           children: [
                                             Text(
-                                              "${user.uid!}",
+                                              "${user.email!}",
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 12,
