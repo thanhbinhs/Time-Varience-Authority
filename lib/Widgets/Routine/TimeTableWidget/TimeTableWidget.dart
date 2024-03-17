@@ -120,6 +120,7 @@ class _TimeTableWidgetState extends State<TimeTableWidget> {
                                   isPressedDayInWeek[index] = true;
                                   dayIsPressed = index + 1;
                                   burnIndex = index;
+                                  VariableData.index = index;
                                   // print(dayIsPressed);
                                   // print(currentDateAsInt);
                                 });

@@ -10,6 +10,7 @@ class VariableData {
   double screenWidth() {
     return MediaQuery.of(context).size.width;
   }
+  static int index = 0;
 
   List<Color> colorList = [
     Color.fromARGB(255, 255, 230, 243),

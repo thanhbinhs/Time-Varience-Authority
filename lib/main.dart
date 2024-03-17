@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget{
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFF5F5F3),
       ),
-      home: HomePage(),
+      home: AuthPage(),
       // routes: {
       //   "/" : (context) => AuthPage(),
       //   // "/home": (context) => HomePage(),
