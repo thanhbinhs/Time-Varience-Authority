@@ -1,7 +1,5 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:tva/Widgets/Routine/VariablesDataRoutineClass.dart';
 
@@ -11,12 +9,14 @@ void AddTimePage(BuildContext context) {
     isScrollControlled: true,
     context: context,
     builder: (context) {
-      return AddTimePageClass();
+      return const AddTimePageClass();
     },
   );
 }
 
 class AddTimePageClass extends StatefulWidget{
+  const AddTimePageClass({super.key});
+
   @override
   State<AddTimePageClass> createState() => _AddTimePageState();
 }
@@ -35,6 +35,7 @@ class _AddTimePageState extends State<AddTimePageClass> {
 
 
 
+  @override
   Widget build(BuildContext context){
     VariableData variableData = VariableData(context);
     return Container(
@@ -45,13 +46,13 @@ class _AddTimePageState extends State<AddTimePageClass> {
         borderRadius: BorderRadius.circular(20),
       ),
       child:  Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
         child: Container(
           // color: Colors.blue,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-                Container(
+                SizedBox(
                   // color: Colors.yellow,
                   height: variableData.screenHeight()*0.06229,
                   child: Row(
@@ -85,8 +86,8 @@ class _AddTimePageState extends State<AddTimePageClass> {
                 ),
 
               Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: SizedBox(
                   height: variableData.screenHeight()*0.7,
                   width: variableData.screenWidth(),
                   // color: Colors.yellow,
@@ -94,7 +95,7 @@ class _AddTimePageState extends State<AddTimePageClass> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(height: 10,),
-                      Container(
+                      SizedBox(
                         height: 150,
                         // color: Colors.blue,
                         child: Center(
@@ -102,7 +103,7 @@ class _AddTimePageState extends State<AddTimePageClass> {
                             isTimePeriod ?
                             "Do it at $startHour:$startMinute of the day "
                             : "Do it from $startHour:$startMinute to $endHour:$endMinute of the day",
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 23,
                               fontWeight: FontWeight.bold,
@@ -113,27 +114,27 @@ class _AddTimePageState extends State<AddTimePageClass> {
                       ),
                       Container(
                         height: 0.8,
-                        color: Color.fromARGB(50, 120, 120, 120),
+                        color: const Color.fromARGB(50, 120, 120, 120),
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       Container(
                         height: 40,
                         width: 400,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(50, 200, 200, 200),
+                          color: const Color.fromARGB(50, 200, 200, 200),
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Stack(
                           children: [
 
                             AnimatedPositioned(
-                              duration: Duration(milliseconds: 200),
+                              duration: const Duration(milliseconds: 200),
                               left: isPressedTimeperiod ? 160 : 0,
                               child: Container(
                                 height: 40,
                                   width: 160,
                                   decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 150, 220, 255),
+                                    color: const Color.fromARGB(255, 150, 220, 255),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                 ),
@@ -144,7 +145,7 @@ class _AddTimePageState extends State<AddTimePageClass> {
                               children: [
 
                                 InkWell(
-                                  child: Container(
+                                  child: SizedBox(
                                     // color: Colors.blue,
                                     height: 40,
                                     width: 160,
@@ -171,7 +172,7 @@ class _AddTimePageState extends State<AddTimePageClass> {
                                   },
                                 ),
                                 InkWell(
-                                  child: Container(
+                                  child: SizedBox(
                                     // color: Colors.b lue,
                                     height: 40,
                                     width: 160,
@@ -204,7 +205,7 @@ class _AddTimePageState extends State<AddTimePageClass> {
 
 
 
-                      Container(
+                      SizedBox(
                         height: 150,
                         // color: Colors.black,
                         child: Column(
@@ -276,7 +277,7 @@ class _AddTimePageState extends State<AddTimePageClass> {
                       ),
 
                       isTimePeriod ? Container(height: 1,) :
-                      Container(
+                      const SizedBox(
                         height: 50,
                         child: Center(
                           child: Text(
@@ -293,7 +294,7 @@ class _AddTimePageState extends State<AddTimePageClass> {
                       Stack(
                         children: [
                           isTimePeriod ? Container(height: 1,) :
-                          Container(
+                          SizedBox(
                             height: 150,
                           // color: Colors.black,
                           child: Column(

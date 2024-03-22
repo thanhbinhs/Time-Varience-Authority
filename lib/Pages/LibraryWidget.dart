@@ -4,6 +4,8 @@ import 'package:tva/Pages/LoginPage.dart';
 import 'VariablesDataClass.dart';
 
 class LibraryWidget extends StatefulWidget {
+  const LibraryWidget({super.key});
+
   @override
   State<LibraryWidget> createState() => _LibraryWidgetState();
 }
@@ -25,7 +27,7 @@ class _LibraryWidgetState extends State<LibraryWidget> {
               context,
               MaterialPageRoute(builder: (context) => const LoginPage()),
             );
-          }, icon: Icon(Icons.logout)),
+          }, icon: const Icon(Icons.logout)),
         ],
       ),
     );

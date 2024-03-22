@@ -7,13 +7,15 @@ void AddReminderPage(BuildContext context) {
     isScrollControlled: true,
     context: context,
     builder: (context) {
-      return AddReminderPageClass();
+      return const AddReminderPageClass();
     },
   );
 }
 
 
 class AddReminderPageClass extends StatefulWidget{
+  const AddReminderPageClass({super.key});
+
   @override
   State<AddReminderPageClass> createState() => _AddReminderPageClassState();
 }

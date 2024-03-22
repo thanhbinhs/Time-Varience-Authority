@@ -4,6 +4,8 @@ import '../VariablesDataRoutineClass.dart';
 
 
 class MonthsInYearTableWWidget extends StatefulWidget{
+  const MonthsInYearTableWWidget({super.key});
+
   @override
   State<MonthsInYearTableWWidget> createState() => _MonthsInYearTableWWidgetState();
 }
@@ -16,13 +18,13 @@ class _MonthsInYearTableWWidgetState extends State<MonthsInYearTableWWidget> {
   @override
   Widget build(BuildContext context){
     VariableData variableData = VariableData(context);
-    return Container(
+    return SizedBox(
       height: variableData.screenHeight()*0.044,
       //color: Colors.yellow,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
               width: variableData.screenHeight()*0.124584,
               child: Stack(
                 children: [
@@ -41,7 +43,7 @@ class _MonthsInYearTableWWidgetState extends State<MonthsInYearTableWWidget> {
                             color: Colors.orange,
                             borderRadius: BorderRadius.circular(20)
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text('Today'),
@@ -58,8 +60,8 @@ class _MonthsInYearTableWWidgetState extends State<MonthsInYearTableWWidget> {
               )
           ),
           Text(
-            '${currentMonthAsInt} ${currentDateAsInt},${currentYearAsInt}',
-            style: TextStyle(
+            '$currentMonthAsInt $currentDateAsInt,$currentYearAsInt',
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 15,
             ),

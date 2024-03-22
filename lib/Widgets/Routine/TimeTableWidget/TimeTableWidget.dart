@@ -3,6 +3,8 @@ import '../VariablesDataRoutineClass.dart';
 import 'package:intl/intl.dart';
 
 class TimeTableWidget extends StatefulWidget{
+  const TimeTableWidget({super.key});
+
   @override
   State<TimeTableWidget> createState() => _TimeTableWidgetState();
 }
@@ -22,7 +24,8 @@ class _TimeTableWidgetState extends State<TimeTableWidget> {
   double screenHeight() {
     return MediaQuery.of(context).size.height;
   }
-    void initState() {
+    @override
+  void initState() {
       super.initState();
     burnIndex = currentDateAsInt - 1;
     Future.delayed(Duration.zero, () {
@@ -46,7 +49,7 @@ class _TimeTableWidgetState extends State<TimeTableWidget> {
     DateTime lastDayOfMonth = DateTime(now.year, now.month + 1, 0);
     int lastDayOfMonthAsInt = lastDayOfMonth.day;
 
-    ScrollController _controller = ScrollController(initialScrollOffset:  (currentDateAsInt - 1) * (variableData.screenHeight()*0.05606 + 7 * 2 ));
+    ScrollController controller = ScrollController(initialScrollOffset:  (currentDateAsInt - 1) * (variableData.screenHeight()*0.05606 + 7 * 2 ));
 
     return Container(
       height: variableData.screenHeight()*0.197,
@@ -55,7 +58,7 @@ class _TimeTableWidgetState extends State<TimeTableWidget> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           //********************** MonthsInYearTableWWidget *****************//
-          Container(
+          SizedBox(
             height: variableData.screenHeight()*0.044,
             //color: Colors.yellow,
             child: Row(
@@ -69,9 +72,9 @@ class _TimeTableWidgetState extends State<TimeTableWidget> {
 
                   dayIsPressed == currentDateAsInt ?
                   'Today' : ((dayIsPressed - currentDateAsInt) == 1 ?
-                  'Tomorrow' : ((currentDateAsInt - dayIsPressed) == 1 ? 'Yesterday' : '$formattedDateMonth ${dayIsPressed}, ${currentYearAsInt}')),
+                  'Tomorrow' : ((currentDateAsInt - dayIsPressed) == 1 ? 'Yesterday' : '$formattedDateMonth $dayIsPressed, $currentYearAsInt')),
                   //'$_scrollPosition',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
@@ -84,23 +87,23 @@ class _TimeTableWidgetState extends State<TimeTableWidget> {
             ),
           ),
           //********************** DaysInWeekTableWidget ***********************//
-          Container(
+          SizedBox(
             height: variableData.screenHeight()*0.11,
             // color: Colors.blue,
               child: ListView(
-                controller: _controller,
+                controller: controller,
                 scrollDirection: Axis.horizontal,
                 children: List.generate(lastDayOfMonthAsInt, (index) =>
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: SizedBox(
                         height: variableData.screenHeight()*0.11,
                         width: 50,
                         // color: Colors.green,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Container(
+                            SizedBox(
                               height:  variableData.screenHeight()*0.01245,
                               width:  variableData.screenHeight()*0.0622,
                               // color: Colors.orange,
@@ -135,7 +138,7 @@ class _TimeTableWidgetState extends State<TimeTableWidget> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: variableData.screenHeight()*0.0436,
                                       // color: Colors.white,
                                       child: Center(
@@ -194,7 +197,7 @@ class TrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
-      ..color = Color.fromARGB(255,128,50,128)
+      ..color = const Color.fromARGB(255,128,50,128)
       ..strokeWidth = 2.0
       ..strokeCap = StrokeCap.round;
 

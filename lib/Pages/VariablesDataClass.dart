@@ -9,5 +9,5 @@ class VariableData {
   double screenWidth() {
     return MediaQuery.of(context).size.width;
   }
-  Color backgroundColor4_3D = Color.fromARGB(255, 20, 20, 20);
+  Color backgroundColor4_3D = const Color.fromARGB(255, 20, 20, 20);
 }

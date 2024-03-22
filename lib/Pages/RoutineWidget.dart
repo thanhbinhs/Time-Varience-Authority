@@ -6,14 +6,16 @@ import 'VariablesDataClass.dart';
 
 
 class RoutineWidget extends StatelessWidget {
+  const RoutineWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     VariableData variableData = VariableData(context);
     return Container(
       height: variableData.screenHeight(),
       width: variableData.screenWidth(),
-      color: Color.fromARGB(255, 243, 239, 255),
-      child: Stack(
+      color: const Color.fromARGB(255, 243, 239, 255),
+      child: const Stack(
         children: [
           ListTaskWidget(),
           AddNewTaskPageWidget(),

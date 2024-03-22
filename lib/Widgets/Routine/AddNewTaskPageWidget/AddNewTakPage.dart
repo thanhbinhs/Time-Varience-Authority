@@ -4,6 +4,8 @@ import 'MainAddnewTaskPage.dart';
 
 
 class AddNewTaskPageWidget extends StatefulWidget{
+  const AddNewTaskPageWidget({super.key});
+
   @override
   State<AddNewTaskPageWidget> createState() => _AddNewTaskPageWidgetState();
 }
@@ -25,8 +27,8 @@ class _AddNewTaskPageWidgetState extends State<AddNewTaskPageWidget> {
                 children: [
                   PhysicalModel(
                     elevation: 5,
-                    shadowColor: Color.fromARGB(255, 245, 245, 245),
-                    color: Color.fromARGB(150, 112,76,230),
+                    shadowColor: const Color.fromARGB(255, 245, 245, 245),
+                    color: const Color.fromARGB(150, 112,76,230),
                     shape: BoxShape.circle,
                     child: SizedBox(
                       width: variableData.screenHeight()*0.06852,

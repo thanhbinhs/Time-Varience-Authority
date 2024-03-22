@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:tva/Pages/LibraryWidget.dart';
@@ -65,11 +64,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             children: [
               Container(
                 height: variableData.screenHeight()/2,
-                color: Color.fromARGB(255, 6, 6, 6),
+                color: const Color.fromARGB(255, 6, 6, 6),
               ),
               Container(
                 height: variableData.screenHeight()/2,
-                color: Color.fromARGB(255, 100, 100, 100),
+                color: const Color.fromARGB(255, 100, 100, 100),
               ),
             ],
           ),
@@ -81,7 +80,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             width: variableData.screenWidth(),
             height: variableData.screenHeight(),
             top: 0,
-            child: ProfileWidget(),
+            child: const ProfileWidget(),
           ),
          Transform(
            alignment: Alignment.center,
@@ -95,7 +94,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       scale: scalAnimation.value,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(30),
-                        child:  currentIndex == 0 ? RoutineWidget() : (currentIndex == 1 ? LibraryWidget() : null),
+                        child:  currentIndex == 0 ? const RoutineWidget() : (currentIndex == 1 ? const LibraryWidget() : null),
                       )
                   )
            ),
@@ -108,9 +107,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               Container(
                 padding: const EdgeInsets.all(12),
                 margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(200, 0, 0, 0),
-                  borderRadius: const BorderRadius.all(Radius.circular(24)),
+                  borderRadius: BorderRadius.all(Radius.circular(24)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

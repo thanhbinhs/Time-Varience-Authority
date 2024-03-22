@@ -5,6 +5,8 @@ import 'package:tva/Pages/LoginPage.dart';
 import 'VariablesDataClass.dart';
 
 class ProfileWidget extends StatefulWidget {
+  const ProfileWidget({super.key});
+
   @override
   State<ProfileWidget> createState() => _ProfileWidgetState();
 }
@@ -16,7 +18,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   @override
   Widget build(BuildContext context) {
     VariableData variableData = VariableData(context);
-    return Container(
+    return SizedBox(
       height: variableData.screenHeight(),
       width: variableData.screenWidth(),
       // color: Colors.pink,
@@ -26,7 +28,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           Container(
               height: variableData.screenHeight(),
               width: variableData.screenWidth() * 0.666667,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
                     Color.fromARGB(250, 0, 0, 0),
@@ -38,29 +40,29 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               ),
               // color: variableData.backgroundColor4_3D,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 35),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 35),
                 child: Container(
                   // color: Colors.blue,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
+                      SizedBox(
                         height: variableData.screenHeight() * 0.0872,
                         // color: Colors.blue,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Container(
+                            SizedBox(
                               // color: Colors.green,
                               width: variableData.screenWidth() * 0.41666,
                               child: Column(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height:
                                         variableData.screenHeight() * 0.0498,
                                     width: variableData.screenWidth() * 0.41666,
                                     // color: Colors.blue,
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Text(
@@ -74,7 +76,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       ],
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                     width: variableData.screenWidth() * 0.41666,
                                     // color: Colors.yellow,
                                     height:
@@ -88,8 +90,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               MainAxisAlignment.end,
                                           children: [
                                             Text(
-                                              "${user.email!}",
-                                              style: TextStyle(
+                                              user.email!,
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 12,
                                               ),
@@ -102,7 +104,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 ],
                               ),
                             ),
-                            Container(
+                            const SizedBox(
                               width: 60,
                               // color: Colors.yellow,
                               child: Icon(
@@ -114,15 +116,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           ],
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 30,
                         width: 200,
                         // color: Colors.pink,
                         child: Column(
                           children: [
-                            Container(
+                            const SizedBox(
                               height: 29,
-                              child: const Text(
+                              child: Text(
                                 "ACCOUNT",
                                 style: TextStyle(
                                   // fontWeight: FontWeight.bold,
@@ -144,7 +146,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             isPressedLogOut = !isPressedLogOut;
                           });
                         },
-                        child: Container(
+                        child: SizedBox(
                           height: variableData.screenHeight() * 0.07,
                           // color: Colors.blue,
                           child: Stack(
@@ -152,7 +154,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               AnimatedPositioned(
                                 width: 400,
                                 left: isPressedLogOut ? 300 : 0,
-                                duration: Duration(milliseconds: 200),
+                                duration: const Duration(milliseconds: 200),
                                 // Sửa từ microseconds thành milliseconds
                                 child: Container(
                                   height: variableData.screenHeight() * 0.07,
@@ -167,7 +169,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Center(
-                                    child: Container(
+                                    child: SizedBox(
                                       // color: Colors.green,
                                       width:
                                           variableData.screenWidth() * 0.41666,
@@ -194,7 +196,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         MaterialPageRoute(builder: (context) => const LoginPage()),
                                       );
                                     },
-                                    icon: Icon(Icons.logout),
+                                    icon: const Icon(Icons.logout),
                                   ),
                                 ],
                               ),
@@ -203,7 +205,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Container(
                           height: 0.8,
                           color: Colors.grey,

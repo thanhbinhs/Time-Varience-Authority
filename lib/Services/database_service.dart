@@ -2,7 +2,6 @@ import 'package:tva/Models/task.dart';
 import 'package:uuid/uuid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class Database{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -25,14 +24,15 @@ class Database{
       .catchError((error) => print("Failed to add user: $error"));
 }
 
-Future<void> addTask(String uid, String name, String sub, Timestamp startTime, Timestamp endTime, bool isDone, int colorId) async {
+Future<void> addTask(String uid, String name, String sub,Timestamp time, Timestamp startTime, Timestamp endTime, bool isDone, int colorId) async {
   try{
-  var uuid = Uuid().v4(); // Tạo UUID để làm ID cho task
+  var uuid = const Uuid().v4(); // Tạo UUID để làm ID cho task
   // Thêm task mới vào Firestore
   await _firestore.collection('users').doc(uid).collection('tasks').doc(uuid).set({
     'id': uuid, 
     'name': name, // Tên task
     'sub': sub, // Mô tả task
+    'time':time,
     'start_time': startTime, // Thời gian bắt đầu
     'end_time': endTime, // Thời gian kết thúc
     'is_done': isDone, // Trạng thái task (đã hoàn thành hay chưa)
@@ -51,9 +51,19 @@ Future<void> delete(String uid, String id) async{
   }
 }
 
+Future<void> updateTask(String uid, String id, bool isDone) async{
+    try{
+      await _firestore.collection('users').doc(uid).collection('tasks').doc(id).update(
+          {'is_done': isDone});
+    }catch(e){
+      print(e);
+    }
+}
+
 Stream<List<Task>> taskStream(String uid) {
   return _firestore.collection('users').doc(uid).collection('tasks').snapshots().map((snapshot) {
     return snapshot.docs.map((doc) => Task.fromDocumentSnapshot(doc)).toList();
   });
 }
 }
+

@@ -4,6 +4,8 @@ import '../VariablesDataRoutineClass.dart';
 
 
 class  DaysInWeekTableWidget extends StatefulWidget{
+  const DaysInWeekTableWidget({super.key});
+
   @override
   State<DaysInWeekTableWidget> createState() => _DaysInWeekTableWidgetState();
 }
@@ -14,6 +16,7 @@ class _DaysInWeekTableWidgetState extends State<DaysInWeekTableWidget> {
   int currentYearAsInt = int.parse(DateTime.now().year.toString());
   int currentMonthAsInt = int.parse(DateTime.now().month.toString());
   int burnIndex = 0;
+  @override
   void initState() {
     super.initState();
     burnIndex = currentDateAsInt - 1;
@@ -32,25 +35,25 @@ class _DaysInWeekTableWidgetState extends State<DaysInWeekTableWidget> {
     int lastDayOfMonthAsInt = lastDayOfMonth.day;
 
 
-    ScrollController _controller = ScrollController();
-    void _scrollToContainer(int index) {
+    ScrollController controller = ScrollController();
+    void scrollToContainer(int index) {
       double offset = (index - 3) * 116.0; // 116 là chiều cao của container và khoảng cách giữa chúng
-      _controller.animateTo(
+      controller.animateTo(
         offset,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
     }
 
-    return  Container(
+    return  SizedBox(
       height: variableData.screenHeight()*0.11,
       //color: Colors.blue,
       child: ListView(
-        controller: _controller,
+        controller: controller,
         scrollDirection: Axis.horizontal,
         children: List.generate(lastDayOfMonthAsInt, (index) =>
             Padding(
-              padding: EdgeInsets.all(7),
+              padding: const EdgeInsets.all(7),
               child: InkWell(
                 onTap: (){
                   setState(() {
@@ -73,7 +76,7 @@ class _DaysInWeekTableWidgetState extends State<DaysInWeekTableWidget> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
+                            SizedBox(
                               height: variableData.screenHeight()*0.034,
                               // color: Colors.blue,
                               child: Column(

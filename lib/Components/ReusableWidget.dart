@@ -1,9 +1,6 @@
 
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:tva/Authentication/authentication.dart';
 
 TextField reusableTextField(String text,IconData icon, bool isPasswordType, TextEditingController controller){
   return TextField(
@@ -12,7 +9,7 @@ TextField reusableTextField(String text,IconData icon, bool isPasswordType, Text
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
     decoration: InputDecoration(
-      enabledBorder: OutlineInputBorder(
+      enabledBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: Colors.white),
       ),
       focusedBorder: OutlineInputBorder(
@@ -35,13 +32,13 @@ Container firebaseButton(BuildContext context, String title, Function onTap){
     height: 50,
     margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
     decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
-    child: FadeInUp(duration: Duration(milliseconds: 1400), child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40),
+    child: FadeInUp(duration: const Duration(milliseconds: 1400), child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Container(
-        padding: EdgeInsets.only(top: 3, left: 3),
+        padding: const EdgeInsets.only(top: 3, left: 3),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
-            border: Border(
+            border: const Border(
               bottom: BorderSide(color: Colors.black),
               top: BorderSide(color: Colors.black),
               left: BorderSide(color: Colors.black),
@@ -59,7 +56,7 @@ Container firebaseButton(BuildContext context, String title, Function onTap){
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50)
           ),
-          child: Text(title, style: TextStyle(
+          child: Text(title, style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 18
           ),),
@@ -84,7 +81,7 @@ class SquareTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(16),

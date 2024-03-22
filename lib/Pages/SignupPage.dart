@@ -1,17 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tva/Authentication/authentication.dart';
 import 'package:tva/Components/ReusableWidget.dart';
 import 'package:tva/Pages/HomePageWidget.dart';
 import 'package:tva/Pages/LoginPage.dart';
-import 'package:tva/Pages/ResetPasswordPage.dart';
-import 'package:tva/Pages/SignupPage.dart';
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-import 'package:tva/main.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tva/Services/database_service.dart';
 
 class SignupPage extends StatefulWidget {
@@ -22,17 +15,17 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
-  TextEditingController _userName = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _userName = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20),
-        child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           child: Column(
@@ -41,12 +34,12 @@ class _SignupPageState extends State<SignupPage> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Text(
+                      const Text(
                         "Signup",
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         "Create an account",
                         style: TextStyle(fontSize: 15, color: Colors.grey[700]),
@@ -54,15 +47,15 @@ class _SignupPageState extends State<SignupPage> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                     child: Column(
                       children: <Widget>[
                         reusableTextField("Username", CupertinoIcons.person,
                             false, _userName),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         reusableTextField(
                             "Email", Icons.email_outlined, false, _email),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         reusableTextField("Password", CupertinoIcons.padlock,
                             true, _password),
                       ],
@@ -79,7 +72,7 @@ class _SignupPageState extends State<SignupPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                                builder: (context) => const HomePage()));
                       }).onError((error, stackTrace) {
                         print("Error ${error.toString()}");
                       });
@@ -103,7 +96,7 @@ class _SignupPageState extends State<SignupPage> {
                             color: Colors.grey[400],
                           ),
                         ),
-                        Text('Or continue with'),
+                        const Text('Or continue with'),
                         Expanded(
                           child: Divider(
                             thickness: 0.5,
@@ -120,7 +113,7 @@ class _SignupPageState extends State<SignupPage> {
                       SquareTile(
                           onTap: () => AuthService().signInWithGoogle(),
                           imagePath: 'assets/Images/google.png'),
-                      SizedBox(width: 25),
+                      const SizedBox(width: 25),
                       SquareTile(
                           onTap: () => AuthService().signInWithApple(),
                           imagePath: 'assets/Images/apple.png')
@@ -146,7 +139,7 @@ class _SignupPageState extends State<SignupPage> {
         GestureDetector(
           onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => LoginPage()));
+                context, MaterialPageRoute(builder: (context) => const LoginPage()));
           },
           child: const Text(
             " Login",

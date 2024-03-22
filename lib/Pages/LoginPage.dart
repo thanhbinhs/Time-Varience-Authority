@@ -1,15 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tva/Authentication/authentication.dart';
 import 'package:tva/Components/ReusableWidget.dart';
 import 'package:tva/Pages/HomePageWidget.dart';
-import 'package:tva/Pages/LibraryWidget.dart';
 import 'package:tva/Pages/ResetPasswordPage.dart';
 import 'package:tva/Pages/SignupPage.dart';
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-import 'package:tva/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,16 +15,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 40),
-        child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 40),
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           child: Column(
@@ -37,12 +33,12 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Text(
+                      const Text(
                         "Login",
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         "Login to your account",
                         style: TextStyle(fontSize: 15, color: Colors.grey[700]),
@@ -50,19 +46,19 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                     child: Column(
                       children: <Widget>[
                         reusableTextField(
                             "Email", Icons.email_outlined, false, _email),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         reusableTextField("Password", CupertinoIcons.padlock,
                             true, _password),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: forgetPassword(context),
                   ),
                   firebaseButton(context, "Sign In", () {
@@ -74,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                                builder: (context) => const HomePage()));
                       }).onError((error, stackTrace) {
                         print("Error ${error.toString()}");
                       });
@@ -96,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.grey[400],
                           ),
                         ),
-                        Text('Or continue with'),
+                        const Text('Or continue with'),
                         Expanded(
                           child: Divider(
                             thickness: 0.5,
@@ -113,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                       SquareTile(
                           onTap: () => AuthService().signInWithGoogle(),
                           imagePath: 'assets/Images/google.png'),
-                      SizedBox(width: 25),
+                      const SizedBox(width: 25),
                       SquareTile(
                           onTap: () => AuthService().signInWithApple(),
                           imagePath: 'assets/Images/apple.png')
@@ -132,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget forgetPassword(BuildContext) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 35,
@@ -144,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
             textAlign: TextAlign.right,
           ),
           onPressed: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ResetPasswordPage())),
+              MaterialPageRoute(builder: (context) => const ResetPasswordPage())),
         ),
       ),
     );
@@ -159,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
         GestureDetector(
           onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => SignupPage()));
+                context, MaterialPageRoute(builder: (context) => const SignupPage()));
           },
           child: const Text(
             " Sign Up",
