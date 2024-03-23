@@ -1,6 +1,7 @@
-import 'dart:js';
-import 'dart:js_interop';
-import 'dart:js_util';
+import 'dart:io' if (dart.library.js) 'dart:js';
+import 'dart:io' if (dart.library.js) 'dart:js_interop';
+import 'dart:io' if (dart.library.js) 'dart:js_util';
+
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
