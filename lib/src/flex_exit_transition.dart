@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 // ignore_for_file: public_member_api_docs
 
 class FlexExitTransition extends MultiChildRenderObjectWidget {
-  const FlexExitTransition({
+  FlexExitTransition({
     Key? key,
     required this.mainAxisExtent,
     required this.direction,

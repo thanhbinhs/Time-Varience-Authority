@@ -5,8 +5,6 @@ import 'package:tva/Pages/LoginPage.dart';
 import 'VariablesDataClass.dart';
 
 class ProfileWidget extends StatefulWidget {
-  const ProfileWidget({super.key});
-
   @override
   State<ProfileWidget> createState() => _ProfileWidgetState();
 }
@@ -15,10 +13,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   bool isPressedLogOut = false;
   final user = FirebaseAuth.instance.currentUser!;
 
+
   @override
   Widget build(BuildContext context) {
     VariableData variableData = VariableData(context);
-    return SizedBox(
+    return Container(
       height: variableData.screenHeight(),
       width: variableData.screenWidth(),
       // color: Colors.pink,
@@ -28,7 +27,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           Container(
               height: variableData.screenHeight(),
               width: variableData.screenWidth() * 0.666667,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
                     Color.fromARGB(250, 0, 0, 0),
@@ -40,29 +39,29 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               ),
               // color: variableData.backgroundColor4_3D,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 35),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 35),
                 child: Container(
                   // color: Colors.blue,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      Container(
                         height: variableData.screenHeight() * 0.0872,
                         // color: Colors.blue,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            Container(
                               // color: Colors.green,
                               width: variableData.screenWidth() * 0.41666,
                               child: Column(
                                 children: [
-                                  SizedBox(
+                                  Container(
                                     height:
                                         variableData.screenHeight() * 0.0498,
                                     width: variableData.screenWidth() * 0.41666,
                                     // color: Colors.blue,
-                                    child: const Row(
+                                    child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Text(
@@ -76,7 +75,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
+                                  Container(
                                     width: variableData.screenWidth() * 0.41666,
                                     // color: Colors.yellow,
                                     height:
@@ -90,8 +89,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               MainAxisAlignment.end,
                                           children: [
                                             Text(
-                                              user.email!,
-                                              style: const TextStyle(
+                                              "${user.email!}",
+                                              style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 12,
                                               ),
@@ -104,7 +103,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 ],
                               ),
                             ),
-                            const SizedBox(
+                            Container(
                               width: 60,
                               // color: Colors.yellow,
                               child: Icon(
@@ -116,15 +115,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      Container(
                         height: 30,
                         width: 200,
                         // color: Colors.pink,
                         child: Column(
                           children: [
-                            const SizedBox(
+                            Container(
                               height: 29,
-                              child: Text(
+                              child: const Text(
                                 "ACCOUNT",
                                 style: TextStyle(
                                   // fontWeight: FontWeight.bold,
@@ -146,7 +145,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             isPressedLogOut = !isPressedLogOut;
                           });
                         },
-                        child: SizedBox(
+                        child: Container(
                           height: variableData.screenHeight() * 0.07,
                           // color: Colors.blue,
                           child: Stack(
@@ -154,7 +153,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               AnimatedPositioned(
                                 width: 400,
                                 left: isPressedLogOut ? 300 : 0,
-                                duration: const Duration(milliseconds: 200),
+                                duration: Duration(milliseconds: 200),
                                 // Sửa từ microseconds thành milliseconds
                                 child: Container(
                                   height: variableData.screenHeight() * 0.07,
@@ -169,7 +168,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Center(
-                                    child: SizedBox(
+                                    child: Container(
                                       // color: Colors.green,
                                       width:
                                           variableData.screenWidth() * 0.41666,
@@ -196,7 +195,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         MaterialPageRoute(builder: (context) => const LoginPage()),
                                       );
                                     },
-                                    icon: const Icon(Icons.logout),
+                                    icon: Icon(Icons.logout),
                                   ),
                                 ],
                               ),
@@ -205,7 +204,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Container(
                           height: 0.8,
                           color: Colors.grey,

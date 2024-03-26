@@ -11,7 +11,7 @@ class TasksListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Danh sách Tasks'),
+        title: Text('Danh sách Tasks'),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -21,7 +21,7 @@ class TasksListScreen extends StatelessWidget {
             .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           }
 
           return ListView(

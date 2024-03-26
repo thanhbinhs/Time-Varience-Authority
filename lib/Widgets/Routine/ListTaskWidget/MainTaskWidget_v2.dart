@@ -1,13 +1,13 @@
-import 'dart:io' if (dart.library.js) 'dart:js';
-import 'dart:io' if (dart.library.js) 'dart:js_interop';
-import 'dart:io' if (dart.library.js) 'dart:js_util';
-
+import 'dart:io' if(dart.library.js) 'dart:js';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:tva/Models/task.dart';
 import 'package:tva/Services/database_service.dart';
+import 'package:tva/Widgets/Routine/ListTaskWidget/MainTaskWidget.dart';
 import 'package:tva/src/action_pane_motions.dart';
 import 'package:tva/src/actions.dart';
 import 'package:tva/src/slidable.dart';
@@ -15,9 +15,11 @@ import '../VariablesDataRoutineClass.dart';
 import 'dart:core';
 
 
-class MainTaskWidget extends StatefulWidget {
-  const MainTaskWidget({Key? key}) : super(key: key);
 
+
+class MainTaskWidget extends StatefulWidget {
+  final int dayIsPressed;
+  MainTaskWidget({Key? key, required this.dayIsPressed}) : super(key: key);
   @override
   State<MainTaskWidget> createState() => _MainTaskWidgetState();
 }
@@ -25,6 +27,8 @@ class MainTaskWidget extends StatefulWidget {
 class _MainTaskWidgetState extends State<MainTaskWidget> {
   final user = FirebaseAuth.instance.currentUser!;
   int index = VariableData.index;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +42,15 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
             .doc(user.uid)
             .collection('tasks')
             .where('is_done', isEqualTo: false)
+            .where('day', isEqualTo: widget.dayIsPressed)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return const Text('Something went wrong');
+            return Text('Something went wrong');
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("Loading");
+            return Text("Loading");
           }
 
           return Container(
@@ -72,22 +77,15 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    SizedBox(
+                    Container(
                       height: variableData.screenHeight() * 0.8,
                       // color: Colors.blue,
                       child: ListView(
-                        children: snapshot.data!.docs
+                        children:
+                        snapshot.data!.docs
                             .map((DocumentSnapshot document) {
                           Map<String, dynamic> data =
-                              document.data()! as Map<String, dynamic>;
-                          DateTime startTime =
-                              (data['start_time'] as Timestamp).toDate();
-                          DateTime endTime =
-                              (data['end_time'] as Timestamp).toDate();
-                          String formattedStartTime =
-                              DateFormat('dd').format(startTime);
-                          String formattedEndTime =
-                              DateFormat('dd').format(endTime);
+                          document.data()! as Map<String, dynamic>;
                           return Container(
                             child: Column(
                               children: [
@@ -101,7 +99,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                             motion: DrawerMotion(),
                                             children: [
                                               SlidableAction(
-                                                onPressed: doNothing,
+                                                onPressed: Edit,
                                                 backgroundColor: Color.fromARGB(
                                                     100, 100, 100, 100),
                                                 foregroundColor: Colors.white,
@@ -109,29 +107,28 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                                 label: "Edit",
                                               ),
                                               SlidableAction(
-                                                onPressed: doNothing,
+                                                // onPressed: Delete(context,Database()),
+                                                onPressed: Edit,
                                                 backgroundColor: Color.fromARGB(
                                                     150, 255, 0, 0),
                                                 foregroundColor: Colors.white,
                                                 icon: Icons.delete_outline,
-                                                label: "Delete",
                                               ),
                                             ],
                                           ),
                                           child: Padding(
-                                            padding: const EdgeInsets.symmetric(
+                                            padding: EdgeInsets.symmetric(
                                                 horizontal: 20, vertical: 5),
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(20),
+                                                BorderRadius.circular(20),
                                                 color:
-                                                    variableData.colorList[data['color_id']],
+                                                variableData.colorList[data['color_id']],
                                               ),
                                               child: Center(
                                                 child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
+                                                  padding: EdgeInsets.symmetric(
                                                       horizontal: 10,
                                                       vertical: 10),
                                                   child: Container(
@@ -140,49 +137,50 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                                       children: [
                                                         Row(
                                                           mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                           children: [
-                                                            SizedBox(
+                                                            Container(
                                                                 width: 50,
                                                                 // color: Colors.blue,
                                                                 child:
-                                                                    IconButton(
-                                                                  icon: const Icon(
+                                                                IconButton(
+                                                                  icon: Icon(
                                                                       Icons
                                                                           .abc),
                                                                   onPressed:
                                                                       () {
+                                                                    Database().delete(user.uid, data['id']);
                                                                     // print("123");
                                                                   },
                                                                 )),
-                                                            SizedBox(
+                                                            Container(
                                                               width: 200,
                                                               // color: Colors.red,
                                                               child: Column(
                                                                 mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
+                                                                MainAxisAlignment
+                                                                    .start,
                                                                 children: [
-                                                                  SizedBox(
+                                                                  Container(
                                                                     // color: Colors.brown,
                                                                     height: 25,
                                                                     child: Row(
                                                                       mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .start,
+                                                                      MainAxisAlignment
+                                                                          .start,
                                                                       children: [
-                                                                        const Text(
+                                                                        Text(
                                                                           "Time: ",
                                                                           style:
-                                                                              TextStyle(
+                                                                          TextStyle(
                                                                             fontSize:
-                                                                                13,
+                                                                            13,
                                                                             // fontWeight: FontWeight.bold,
                                                                           ),
                                                                         ),
                                                                         Text(
-                                                                          "$formattedStartTime - $formattedEndTime",
+                                                                          "${variableData.ChangeFormTime(data['start_hour'],data['start_minute'],data['end_hour'],data['end_minute'],data['is_timeperiod'],)}",
                                                                         ),
                                                                       ],
                                                                     ),
@@ -191,13 +189,13 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                                                     // color: Colors.red,
                                                                     child: Text(
                                                                       data[
-                                                                          'name'],
+                                                                      'name'],
                                                                       style:
-                                                                          const TextStyle(
+                                                                      TextStyle(
                                                                         fontSize:
-                                                                            16,
+                                                                        16,
                                                                         fontWeight:
-                                                                            FontWeight.bold,
+                                                                        FontWeight.bold,
                                                                       ),
                                                                     ),
                                                                   ),
@@ -205,18 +203,18 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                                                     // color: Colors.red,
                                                                     child: Text(
                                                                       data[
-                                                                          'sub'],
+                                                                      'decoration'],
                                                                       style:
-                                                                          const TextStyle(
+                                                                      TextStyle(
                                                                         fontSize:
-                                                                            14,
+                                                                        14,
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ],
                                                               ),
                                                             ),
-                                                            SizedBox(
+                                                            Container(
                                                               width: 50,
                                                               // child: Icon(Icons.abc),
                                                               // color: Colors.black,
@@ -225,64 +223,50 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                                                   children: [
                                                                     Center(
                                                                       child:
-                                                                          InkWell(
+                                                                      InkWell(
                                                                         onTap:
                                                                             () {
                                                                           setState(
-                                                                              () {
-                                                                            // isCompleteTask = !isCompleteTask;
-                                                                            // print(isCompleteTask);
-                                                                          });
+                                                                                  () {
+                                                                                // isCompleteTask = !isCompleteTask;
+                                                                                // print(isCompleteTask);
+                                                                              });
                                                                         },
                                                                         child:
-                                                                            Column(
+                                                                        Column(
                                                                           mainAxisAlignment:
-                                                                              MainAxisAlignment.start,
+                                                                          MainAxisAlignment.start,
                                                                           children: [
-                                                                            const SizedBox(
+                                                                            SizedBox(
                                                                               height: 3,
-                                                                            ),
-                                                                            Container(
-                                                                              height: 27,
-                                                                              width: 27,
-                                                                              decoration: BoxDecoration(
-                                                                                shape: BoxShape.circle,
-                                                                                border: Border.all(
-                                                                                  width: 1,
-                                                                                  color: Colors.grey,
-                                                                                ),
-                                                                              ),
                                                                             ),
                                                                           ],
                                                                         ),
                                                                       ),
                                                                     ),
-                                                                    // isCompleteTask ?
                                                                     Center(
                                                                       child:
-                                                                          InkWell(
+                                                                      InkWell(
                                                                         onTap:
                                                                             () {
                                                                           setState(
-                                                                              () {
-                                                                                Database().updateTask(user.uid, data['id'], true);
-
-                                                                          });
+                                                                                  () {
+                                                                                  Database().updateTask(user.uid, data['id'], true);
+                                                                              });
                                                                         },
                                                                         child:
-                                                                            const SizedBox(
+                                                                        Container(
                                                                           height:
-                                                                              35,
+                                                                          35,
                                                                           width:
-                                                                              35,
+                                                                          35,
                                                                           // color: Colors.white,
                                                                           child:
-                                                                              Icon(
+                                                                          Icon(
                                                                             Icons.check_circle_rounded,
                                                                             size:
-                                                                                35,
-                                                                            color:
-                                                                                Colors.green,
+                                                                            35,
+                                                                            color: data["is_done"] == true ? Colors.green : Colors.white,
                                                                           ),
                                                                         ),
                                                                       ),
@@ -322,5 +306,15 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
   }
 }
 
-void doNothing(BuildContext context) {
+
+void Delete(BuildContext context, String id ) {
+  final user = FirebaseAuth.instance.currentUser!;
+
+  Database().delete(user.uid, id);
+
 }
+
+void Edit(BuildContext context) {
+  print('Do edit in here');
+}
+

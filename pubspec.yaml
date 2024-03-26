@@ -49,6 +49,9 @@ dependencies:
   animate_do: ^3.3.4
   get: ^4.6.6
   uuid: ^4.3.3
+  just_audio: ^0.9.36
+  #play audio
+
 
 
 dev_dependencies:
@@ -78,6 +81,7 @@ flutter:
     - assets/RiveAssets/Icons.riv
     - assets/Images/apple.png
     - assets/Images/google.png
+    - assets/Music/au.mp3
 
   #   - images/a_dot_ham.jpeg
 

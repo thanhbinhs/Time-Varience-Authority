@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tva/Components/ReusableWidget.dart';
+import 'package:tva/Pages/HomePageWidget.dart';
 
 
 class ResetPasswordPage extends StatefulWidget {
@@ -11,7 +12,7 @@ class ResetPasswordPage extends StatefulWidget {
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
-  final TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
 
 
   @override
@@ -26,20 +27,20 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),
-        body: SizedBox(
+        body: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
 
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
+              padding: EdgeInsets.fromLTRB(20, 120, 20, 0),
               child: Column(
                 children: <Widget>[
-                  const SizedBox(
+                  SizedBox(
                     height: 20,
                   ),
                   reusableTextField("Enter Email Address", Icons.email_outlined, false, _emailTextController),
-                  const SizedBox(
+                  SizedBox(
                     height: 20,
                   ),
                   firebaseButton(context, "Reset Password", (){

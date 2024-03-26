@@ -94,7 +94,7 @@ class CustomSlidableAction extends StatelessWidget {
       child:
       SizedBox.expand(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10 ),
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10 ),
           child: OutlinedButton(
             onPressed: () => _handleTap(context),
             style: OutlinedButton.styleFrom(
@@ -201,7 +201,7 @@ class SlidableAction extends StatelessWidget {
       children.add(
         Text(
           label!,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 10,
           ),
         ),

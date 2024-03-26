@@ -1,50 +1,117 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:tva/Services/database_service.dart';
-import 'package:tva/Widgets/Routine/AddNewTaskPageWidget/AddTimePage.dart';
 import 'package:tva/Widgets/Routine/VariablesDataRoutineClass.dart';
+import 'AddNewTimePage.dart';
 
 
-void AddNewTaskPageVer1(BuildContext context) {
+void AddNewTaskPageVer1(BuildContext context, int dayIsPressed) {
   showModalBottomSheet(
     isScrollControlled: true,
     context: context,
     builder: (context) {
-      return const AddNewTaskPage();
+      return AddNewTaskPage(dayIsPressed: dayIsPressed,);
     },
   );
 }
 
 
 class AddNewTaskPage extends StatefulWidget{
-  const AddNewTaskPage({super.key});
-
+  int dayIsPressed;
+  AddNewTaskPage({required this.dayIsPressed});
   @override
   State<AddNewTaskPage> createState() => _AddNewTaskPageState();
 }
 
+
 class _AddNewTaskPageState extends State<AddNewTaskPage> {
-  Color colorTheme = const Color.fromARGB(255, 255, 200, 223);
-  Color colorThemeGradient = const Color.fromARGB(255, 255, 200, 223);
+
+  // Task Name
+  String taskName = '';
+
+  // color id
+  int colorID = 0;
+
+  // Date
+ // widget.dayIsPressed;
+
+  // variable của Addnewtimepage
+  var startHour = 0;
+  var startMinute = 0;
+  var endHour = 0;
+  var endMinute = 0;
+  bool isSetime = false;
+  bool isPressedTimeperiod = false;
+
+
+
+
+  Color colorTheme = Color.fromARGB(255, 255, 200, 223);
+  Color colorThemeGradient = Color.fromARGB(255, 255, 200, 223);
   List<bool> isPressedColorTheme = List.generate(7, (index) => false);
-  final TextEditingController _taskName = TextEditingController();
-  final TextEditingController _taskSub = TextEditingController();
-  int colorId = 1;
-  TextEditingController _dateController = TextEditingController();
+
+  TextEditingController _taskName = TextEditingController();
+  TextEditingController _taskSub = TextEditingController();
   // TextEditingController _taskStartTime = TextEditingController();
   // TextEditingController _taskEndTime = TextEditingController();
-    final user = FirebaseAuth.instance.currentUser!;
-
-
-
+  final user = FirebaseAuth.instance.currentUser!;
   int BurnIndex = 0;
 
+  void AddTimePage(BuildContext context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) => AddTimePageWidget(),
+    ).then((value) {
+      if (value != null) {
+        setState(() {
+          startHour = value[0];
+        startMinute = value[1];
+        endHour = value[2];
+        endMinute = value[3];
+        isSetime = value[4];
+        isPressedTimeperiod = value[5];
+        });
+      }
+    });
+  }
+
+
+  String changeFormTimeTwoNumber(int num) {
+    if (num <= 9) {
+      return '0$num';
+    } else {
+      return num.toString();
+    }
+  }
+
+  String  ChangeFormTime(var startHour, var startMinute, var endHour, var endMinute){
+    if (isSetime == true && isPressedTimeperiod == true ){
+      return '${changeFormTimeTwoNumber(startHour)}:${changeFormTimeTwoNumber(startMinute)} to ${changeFormTimeTwoNumber(endHour)}:${changeFormTimeTwoNumber(endMinute)}';
+    } else{
+      if(isSetime == true && isPressedTimeperiod == false ){
+        return '${changeFormTimeTwoNumber(startHour)}:${changeFormTimeTwoNumber(startMinute)}';
+      }
+      else{
+        return "No";
+      }
+    }
+
+  }
+
+  int currentDateAsInt =  int.parse(DateTime.now().day.toString());
+  int currentYearAsInt = int.parse(DateTime.now().year.toString());
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedDateMonth = DateFormat('MMM').format(now);
+
     VariableData variableData = VariableData(context);
-    void dismissKeyboard() {
+    void _dismissKeyboard() {
       FocusScope.of(context).unfocus();
     }
     double screenHeight() {
@@ -54,7 +121,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
       return MediaQuery.of(context).size.width;
     }
     return GestureDetector(
-      onTap: dismissKeyboard,
+      onTap: _dismissKeyboard,
       child:
       Container(
         width: screenWidth(),
@@ -73,8 +140,8 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child:SizedBox(
+            Padding(padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child:Container(
               height: screenHeight()*0.06229,
               //color: Colors.orange,
               child: Row(
@@ -82,8 +149,8 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                 children: [
                   IconButton(
                     onPressed: (){
-                      dismissKeyboard();
-                      Future.delayed(const Duration(milliseconds: 300), () {
+                      _dismissKeyboard();
+                      Future.delayed(Duration(milliseconds: 300), () {
                         Navigator.pop(context);
                       });
                     },
@@ -95,8 +162,10 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                   ),
                   TextButton(
                     onPressed: (){
-                      Database().addTask(user.uid, _taskName.text, _taskSub.text,Timestamp.now(), Timestamp.now(), Timestamp.now(), false, colorId);
-                      // print(variableData.screenHeight());
+                      Database().addTask(user.uid, _taskName.text, _taskSub.text, widget.dayIsPressed, startHour, startMinute, endHour, endMinute, isPressedTimeperiod, false, colorID);
+                      Future.delayed(Duration(milliseconds: 300), () {
+                        Navigator.pop(context);
+                      });
                     },
                     child: const Text(
                       "Create",
@@ -113,46 +182,47 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
 
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SizedBox(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
                 height: variableData.screenHeight() * 0.81,
                 // color: Colors.yellow,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(
+                      Container(
                         height: variableData.screenHeight() * 0.0872,
                         // color: Colors.blue,
                         child: IconButton(
-                          icon: const Icon(Icons.abc),
+                          icon: Icon(Icons.abc),
                           onPressed: () {
-
                           },
                         ),
                       ),
-
                       TextField(
                         maxLines: null,
                         controller: _taskName,
                         maxLength: 70,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 22,
                         ),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "New Task",
-                          // Remove the underline border
                           border: InputBorder.none,
-                          // Optionally, add some padding to the input
                           contentPadding: EdgeInsets.all(0),
                         ),
+                        onChanged: (text) {
+                          setState(() {
+                            taskName = text;
+                          });
+                        },
                       ),
 
-                      const SizedBox(height: 15,),
+                      SizedBox(height: 15,),
 
-                      SizedBox(
+                      Container(
                         //color: Colors.green,
                         height: variableData.screenHeight() * 0.049833,
                         child: Row(
@@ -164,9 +234,9 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                                   setState(() {
                                     isPressedColorTheme = List.generate(7, (index) => false);
                                     isPressedColorTheme[i] = true;
+                                    colorID = i;
                                     colorTheme = variableData.colorList[i];
                                     colorThemeGradient = variableData.colorListGradient[i];
-                                    colorId = i;
                                     BurnIndex = -1;
                                   });
                                 },
@@ -174,7 +244,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                                   children: [
                                     PhysicalModel(
                                       elevation: 2,
-                                      shadowColor: const Color.fromARGB(255, 245, 245, 245),
+                                      shadowColor: Color.fromARGB(255, 245, 245, 245),
                                       color: Colors.blue,
                                       shape: BoxShape.circle,
                                       child: SizedBox(
@@ -219,218 +289,199 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                         ),
                         child: Column(
                           children: [
-                            // SizedBox(
-                            //     height: variableData.screenHeight() * 0.07475,
-                            //      // color: Colors.green,
-                            //     child: Row(
-                            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            //       children: [
-                            //         TextField(
-                            //           controller: _dateController,
-                            //           decoration: InputDecoration(
-                            //             labelText: 'DATE',
-                            //             filled: true,
-                            //             prefixIcon: Icon(Icons.calendar_today),
-                            //             enabledBorder: OutlineInputBorder(
-                            //               borderSide: BorderSide.none
-                            //             ),
-                            //             focusedBorder: OutlineInputBorder(
-                            //               borderSide: BorderSide(color: Colors.blue)
-                            //             )
-                            //           ),
-                            //           readOnly: true,
-                            //           onTap: (){
-                            //             _selectDate();
-                            //           },
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
+                            InkWell(
+                              child: Container(
+                                height: variableData.screenHeight() * 0.07475,
+                                 // color: Colors.green,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                      width: variableData.screenHeight() * 0.2616,
+                                      // color: Colors.blue,
+                                      child:  Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            widget.dayIsPressed == currentDateAsInt ?
+                                            'Date: Today' : ((widget.dayIsPressed - currentDateAsInt) == 1 ?
+                                            'Date: Tomorrow' :  'Date: $formattedDateMonth ${widget.dayIsPressed}, ${currentYearAsInt}'),
+                                          style: TextStyle(
+                                            fontSize: 17,
+
+                                          ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: variableData.screenHeight() * 0.0436,
+                                      // color: Colors.green,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Icon(Icons.calendar_today),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              onTap: (){
+                                print(widget.dayIsPressed);
+                              },
+                            ),
 
 
+                            Padding(padding: EdgeInsets.symmetric(
+                                horizontal: 25,),
+                              child: Container(height: 1.5, color: Color.fromARGB(200, 200, 200, 200)),
+                            ),
+
+                            InkWell(
+                              child: Container(
+                                height: variableData.screenHeight() * 0.07475,
+                                // color: Colors.green,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                      width:variableData.screenHeight() * 0.2616,
+                                      // color: Colors.blue,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Time: ',
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                          Text(
+                                            ChangeFormTime(startHour,startMinute,endHour,endMinute),
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: variableData.screenHeight() * 0.0436,
+                                      // color: Colors.green,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Icon(Icons.alarm_rounded,size: 30,),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              onTap: (){
+                                setState(() {
+                                  isSetime = false;
+                                  AddTimePage(context);
+                                });
+                                // print(isSetime);
+                              },
+                            ),
+                            Padding(padding: EdgeInsets.symmetric(
+                              horizontal: 25,),
+                              child: Container(height: 1.5,color: Color.fromARGB(200, 200, 200, 200),),
+                            ),
+                            InkWell(
+                              child: Container(
+                                height: variableData.screenHeight() * 0.07475,
+                                // color: Colors.green,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                      width: variableData.screenHeight() * 0.2616,
+                                      // color: Colors.blue,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Reminder: ',
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: variableData.screenHeight() * 0.0436,
+                                      // color: Colors.green,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Icon(Icons.doorbell_outlined,size: 30,),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
 
 
-                            // Padding(padding: const EdgeInsets.symmetric(
-                            //     horizontal: 25,),
-                            //   child: Container(height: 1.5, color: const Color.fromARGB(200, 200, 200, 200)),
-                            // ),
-                            //
-                            // InkWell(
-                            //   child: SizedBox(
-                            //     height: variableData.screenHeight() * 0.07475,
-                            //     // color: Colors.green,
-                            //     child: Row(
-                            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            //       children: [
-                            //         SizedBox(
-                            //           width:variableData.screenHeight() * 0.2616,
-                            //           // color: Colors.blue,
-                            //           child: const Row(
-                            //             mainAxisAlignment: MainAxisAlignment.start,
-                            //             children: [
-                            //               Text(
-                            //                 'Time: ',
-                            //                 style: TextStyle(
-                            //                   fontSize: 17,
-                            //                 ),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //         SizedBox(
-                            //           width: variableData.screenHeight() * 0.0436,
-                            //           // color: Colors.green,
-                            //           child: const Row(
-                            //             mainAxisAlignment: MainAxisAlignment.end,
-                            //             children: [
-                            //               Icon(Icons.alarm_rounded,size: 30,),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            //   onTap: (){
-                            //     AddTimePage(context);
-                            //   },
-                            // ),
-                            // Padding(padding: const EdgeInsets.symmetric(
-                            //   horizontal: 25,),
-                            //   child: Container(height: 1.5,color: const Color.fromARGB(200, 200, 200, 200),),
-                            // ),
-                            // InkWell(
-                            //   child: SizedBox(
-                            //     height: variableData.screenHeight() * 0.07475,
-                            //     // color: Colors.green,
-                            //     child: Row(
-                            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            //       children: [
-                            //         SizedBox(
-                            //           width: variableData.screenHeight() * 0.2616,
-                            //           // color: Colors.blue,
-                            //           child: const Row(
-                            //             mainAxisAlignment: MainAxisAlignment.start,
-                            //             children: [
-                            //               Text(
-                            //                 'Reminder: ',
-                            //                 style: TextStyle(
-                            //                   fontSize: 17,
-                            //                 ),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //         SizedBox(
-                            //           width: variableData.screenHeight() * 0.0436,
-                            //           // color: Colors.green,
-                            //           child: const Row(
-                            //             mainAxisAlignment: MainAxisAlignment.end,
-                            //             children: [
-                            //               Icon(Icons.doorbell_outlined,size: 30,),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //
-                            //
-                            //   ),
-                            //   onTap: (){
-                            //
-                            //   },
-                            // ),
-                            // Padding(padding: const EdgeInsets.symmetric(
-                            //   horizontal: 25,),
-                            //   child: Container(height: 1.5, color: const Color.fromARGB(200, 200, 200, 200),),
-                            // ),
-                            // InkWell(
-                            //   child: SizedBox(
-                            //     height: variableData.screenHeight() * 0.07475,
-                            //     // color: Colors.green,
-                            //     child: Row(
-                            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            //       children: [
-                            //         SizedBox(
-                            //           width: variableData.screenHeight() * 0.2616,
-                            //           // color: Colors.blue,
-                            //           child: const Row(
-                            //             mainAxisAlignment: MainAxisAlignment.start,
-                            //             children: [
-                            //               Text(
-                            //                 'Tag: ',
-                            //                 style: TextStyle(
-                            //                   fontSize: 17,
-                            //                 ),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //         SizedBox(
-                            //           width: variableData.screenHeight() * 0.0436,
-                            //           // color: Colors.green,
-                            //           child: const Row(
-                            //             mainAxisAlignment: MainAxisAlignment.end,
-                            //             children: [
-                            //               Icon(Icons.discount_outlined,size: 30,),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //
-                            //   ),
-                            //   onTap: (){
-                            //
-                            //   },
-                            // ),
+                              ),
+                              onTap: (){
+
+                              },
+                            ),
+                            Padding(padding: EdgeInsets.symmetric(
+                              horizontal: 25,),
+                              child: Container(height: 1.5, color: Color.fromARGB(200, 200, 200, 200),),
+                            ),
+                            InkWell(
+                              child: Container(
+                                height: variableData.screenHeight() * 0.07475,
+                                // color: Colors.green,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                      width: variableData.screenHeight() * 0.2616,
+                                      // color: Colors.blue,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Tag: ',
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: variableData.screenHeight() * 0.0436,
+                                      // color: Colors.green,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Icon(Icons.discount_outlined,size: 30,),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              onTap: (){
+
+                              },
+                            ),
 
                           ],
                         ),
                       ),
                       const SizedBox(height: 10,),
 
-                      // InkWell(
-                      //   child: Container(
-                      //     height: variableData.screenHeight() * 0.07475,
-                      //     decoration: BoxDecoration(
-                      //         color: Colors.white,
-                      //       borderRadius: BorderRadius.circular(20)
-                      //     ),
-                      //     child:
-                      //     Padding(padding: EdgeInsets.symmetric(horizontal: 20),
-                      //         child: Row(
-                      //           mainAxisAlignment: MainAxisAlignment.start,
-                      //           children: [
-                      //             Container(
-                      //               width: 35,
-                      //               // color: Colors.green,
-                      //               child: Row(
-                      //                 mainAxisAlignment: MainAxisAlignment.start,
-                      //                 children: [
-                      //                   Icon(Icons.add_circle_outline_rounded,size:30),
-                      //                 ],
-                      //               ),
-                      //             ),
-                      //             Container(
-                      //               width: 240,
-                      //               height: 70,
-                      //               color: Colors.yellow,
-                      //               child: Row(
-                      //                 mainAxisAlignment: MainAxisAlignment.start,
-                      //                 children: [
-                      //                 ],
-                      //               ),
-                      //             ),
-                      //
-                      //
-                      //           ],
-                      //         ),
-                      //     ),
-                      //   ),
-                      //   onTap: (){
-                      //
-                      //   },
-                      // ),
 
                     ],
                   ),
@@ -443,37 +494,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
       ),
     );
   }
-
-  Future<void> _selectDate() async{
-    DateTime? _picked = await showDatePicker(context: context,initialDate: DateTime.now(), firstDate: DateTime.now() , lastDate: DateTime(2040));
-
-    if(_picked != null){
-      setState(() {
-        _dateController.text = _picked.toString().split("")[0];
-      });
-    }
-  }
-
 }
 
-
-
-// TextField(
-// maxLines: null,
-// maxLength: 70,
-// textAlign: TextAlign.center,
-// style: TextStyle(
-// color: Colors.black,
-// fontWeight: FontWeight.bold,
-// fontSize: 22,
-// ),
-// decoration: InputDecoration(
-// hintText: "New Task",
-// // Remove the underline border
-// border: InputBorder.none,
-// // Optionally, add some padding to the input
-// contentPadding: EdgeInsets.all(0),
-// ),
-// ),
 
 
