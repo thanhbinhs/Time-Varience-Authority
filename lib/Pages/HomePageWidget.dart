@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:tva/Pages/LibraryWidget.dart';
@@ -60,20 +60,22 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
               Container(
-                height: variableData.screenHeight()/2,
-                color: Color.fromARGB(255, 6, 6, 6),
+                height: variableData.screenHeight(),
+                width: variableData.screenWidth(),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.black,
+                  // gradient: LinearGradient(
+                  //   colors: [
+                  //     Color.fromARGB(250, 0, 0, 0),
+                  //     Color.fromARGB(255, 100, 100, 100),
+                  //   ],
+                  //   begin: Alignment.topLeft,
+                  //   end: Alignment.bottomRight,
+                  // ),
+                ),
               ),
-              Container(
-                height: variableData.screenHeight()/2,
-                color: Color.fromARGB(255, 100, 100, 100),
-              ),
-            ],
-          ),
-
           AnimatedPositioned(
             duration: const Duration(milliseconds: 200),
             left: isSideMenuClosed ? variableData.screenWidth() : 0,
@@ -206,7 +208,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
 
               ),
-
 
             ],
           ),

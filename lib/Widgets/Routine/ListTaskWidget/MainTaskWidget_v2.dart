@@ -30,7 +30,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
   void Delete(String id){
     Database().delete(user.uid, id);
   }
-
+  bool isComplete = false;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +115,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                 height: 35,
                                 width: 50,
                                 decoration: BoxDecoration(
-                                  // color: Colors.black,
+                                  color: checkAll ? Color.fromARGB(255, 150, 220, 255) : null,
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
                                     color: variableData.colorBorder, // Màu viền mong muốn
@@ -150,7 +150,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                 height: 35,
                                 width: 90,
                                 decoration: BoxDecoration(
-                                  // color: Colors.black,
+                                  color: checkDone ? Color.fromARGB(255, 150, 220, 255) : null,
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
                                     color: variableData.colorBorder, // Màu viền mong muốn
@@ -186,11 +186,11 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                 height: 35,
                                 width: 90,
                                 decoration: BoxDecoration(
-                                  // color: Colors.black,
+                                  color: (checkDone == false && checkAll == false)  ? Color.fromARGB(255, 150, 220, 255) : null,
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
-                                    color: variableData.colorBorder, // Màu viền mong muốn
-                                    width: 1, // Độ dày của viền
+                                    color: variableData.colorBorder,
+                                    width: 1,
                                   ),
                                 ),
                                 child:
@@ -215,7 +215,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                       height: variableData.screenHeight() * 0.69,
                       child: ListView.separated(
                         padding: EdgeInsets.only(top: 10,bottom: 40),
-                        separatorBuilder: (BuildContext context, int index) => SizedBox(height: 0), // Thay thế bằng widget phân cách mong muốn
+                        separatorBuilder: (BuildContext context, int index) => SizedBox(height: 0),
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (BuildContext context, int index) {
                           DocumentSnapshot document = snapshot.data!.docs[index];
@@ -264,9 +264,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                       child: Column(
                                         children: [
                                           Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .spaceBetween,
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Container(
                                                   width: 50,
@@ -286,17 +284,13 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                                 width: 200,
                                                 // color: Colors.red,
                                                 child: Column(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .start,
+                                                  mainAxisAlignment: MainAxisAlignment.start,
                                                   children: [
                                                     Container(
                                                       // color: Colors.brown,
                                                       height: 25,
                                                       child: Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .start,
+                                                        mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
                                                           Text(
                                                             "Time: ",
@@ -308,7 +302,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            "${variableData.ChangeFormTime(data['start_hour'],data['start_minute'],data['end_hour'],data['end_minute'],data['is_timeperiod'],)}",
+                                                            "${variableData.ChangeFormTime(data['start_hour'],data['start_minute'],data['end_hour'],data['end_minute'],data['is_timeperiod'],data['is_timeperiod'])}",
                                                           ),
                                                         ],
                                                       ),
@@ -316,26 +310,21 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                                     Container(
                                                       // color: Colors.red,
                                                       child: Text(
-                                                        data[
-                                                        'name'],
+                                                        data['name'],
                                                         style:
                                                         TextStyle(
-                                                          fontSize:
-                                                          16,
-                                                          fontWeight:
-                                                          FontWeight.bold,
+                                                          fontSize: 16,
+                                                          fontWeight: FontWeight.bold,
                                                         ),
                                                       ),
                                                     ),
                                                     Container(
                                                       // color: Colors.red,
                                                       child: Text(
-                                                        data[
-                                                        'decoration'],
+                                                        data['decoration'],
                                                         style:
                                                         TextStyle(
-                                                          fontSize:
-                                                          14,
+                                                          fontSize: 14,
                                                         ),
                                                       ),
                                                     ),
@@ -362,8 +351,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                                           },
                                                           child:
                                                           Column(
-                                                            mainAxisAlignment:
-                                                            MainAxisAlignment.start,
+                                                            mainAxisAlignment: MainAxisAlignment.start,
                                                             children: [
                                                               SizedBox(
                                                                 height: 3,
@@ -375,26 +363,23 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                                       Center(
                                                         child:
                                                         InkWell(
-                                                          onTap:
-                                                              () {
-                                                            setState(
-                                                                    () {
-                                                                  Database().updateTask(user.uid, data['id'], true);
+                                                          onTap: () {
+
+                                                            setState(() {
+                                                              isComplete = !isComplete;
+                                                                  Database().updateTask(user.uid, data['id'], isComplete);
                                                                 });
                                                           },
                                                           child:
                                                           data['is_done'] ?
                                                           Container(
-                                                            height:
-                                                            35,
-                                                            width:
-                                                            35,
+                                                            height: 35,
+                                                            width: 35,
                                                             // color: Colors.white,
                                                             child:
                                                             Icon(
                                                               Icons.check_circle_rounded,
-                                                              size:
-                                                              35,
+                                                              size: 35,
                                                               color: Color.fromARGB(255,94, 190, 109),
                                                             ),
                                                           ) :

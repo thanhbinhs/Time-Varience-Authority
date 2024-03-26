@@ -53,7 +53,7 @@ class VariableData {
     }
   }
 
-  String  ChangeFormTime(var startHour, var startMinute, var endHour, var endMinute,  bool isPressedTimeperiod){
+  String  ChangeFormTime(var startHour, var startMinute, var endHour, var endMinute,  bool isPressedTimeperiod,bool isSetTime){
     if ( isPressedTimeperiod == true ){
       return '${changeFormTimeTwoNumber(startHour)}:${changeFormTimeTwoNumber(startMinute)} to ${changeFormTimeTwoNumber(endHour)}:${changeFormTimeTwoNumber(endMinute)}';
     } else{

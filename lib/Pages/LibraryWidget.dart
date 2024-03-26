@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:tva/Widgets/Library/StopPauseNSlide.dart';
 import 'VariablesDataClass.dart';
 
 class LibraryWidget extends StatefulWidget {
@@ -8,27 +8,8 @@ class LibraryWidget extends StatefulWidget {
 }
 
 class _LibraryWidgetState extends State<LibraryWidget> {
-
-  final AudioPlayer _audioPlayer = AudioPlayer();
-  double _sliderValue = 0.0;
-
-  @override
-  void initState() {
-    super.initState();
-    _audioPlayer.durationStream.listen((duration) {
-      setState(() {
-        // Cập nhật giá trị của thanh trượt dựa trên thời lượng của âm thanh
-        _sliderValue = 0.0;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
-  }
-
+  int isPressedSong = 0;
+  // List<bool> isPressedSong = List.generate(9, (index) => false);
 
 
   @override
@@ -71,8 +52,6 @@ class _LibraryWidgetState extends State<LibraryWidget> {
                   child: ListView(
                     padding: EdgeInsets.all(0),
                     children: [
-
-
                       Container(
                         height: variableData.screenHeight()*0.34,
                         width: variableData.screenWidth(),
@@ -293,7 +272,6 @@ class _LibraryWidgetState extends State<LibraryWidget> {
                                                           child: Column(
                                                             mainAxisAlignment: MainAxisAlignment.start,
                                                             children: [
-
                                                               Row(
                                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                                 children: [
@@ -339,10 +317,6 @@ class _LibraryWidgetState extends State<LibraryWidget> {
                                     Container(
                                       color: Colors.orange,
                                     ),
-
-
-
-
                                   ],
                                 ),
                               ),
@@ -358,75 +332,14 @@ class _LibraryWidgetState extends State<LibraryWidget> {
           ),
 
           Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Color.fromARGB(100, 0, 0, 0),
-                  ),
-                  height: 100,
-                  width: variableData.screenWidth() - 20,
-                  child:  Column(
-                    children: [
-                      Container(
-                        height: 20,
-                        decoration: BoxDecoration(
-                          color: Colors.brown,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      Container(
-
-                      ),
-                    ],
-                  ),
-                  // child: Column(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: <Widget>[
-                  //     StreamBuilder<PlayerState>(
-                  //       stream: _audioPlayer.playerStateStream,
-                  //       builder: (context, snapshot) {
-                  //         final playbackState = snapshot.data;
-                  //         final playing = playbackState?.playing ?? false;
-                  //         return IconButton(
-                  //           icon: Icon(
-                  //             playing ? Icons.pause : Icons.play_arrow,
-                  //             size: 40.0,
-                  //           ),
-                  //           onPressed: () {
-                  //             if (playing) {
-                  //               _audioPlayer.pause();
-                  //             } else {
-                  //               _audioPlayer.play();
-                  //             }
-                  //           },
-                  //         );
-                  //       },
-                  //     ),
-                  //     SizedBox(height: 16.0),
-                  //     StreamBuilder<Duration?>(
-                  //       stream: _audioPlayer.positionStream,
-                  //       builder: (context, snapshot) {
-                  //         final position = snapshot.data ?? Duration.zero;
-                  //         final duration = _audioPlayer.duration ?? Duration.zero;
-                  //         return Slider(
-                  //           value: position.inSeconds.toDouble(),
-                  //           min: 0.0,
-                  //           max: duration.inSeconds.toDouble(),
-                  //           onChanged: (value) {
-                  //             final newPosition = Duration(seconds: value.toInt());
-                  //             _audioPlayer.seek(newPosition);
-                  //           },
-                  //         );
-                  //       },
-                  //     ),
-                  //   ],
-                  // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                      StopPauseNsilde(songInfor: "123", songPath: "123", nameSong: "123",),
+                  ],
                 ),
-              ),
-              SizedBox(height: 100,),
             ],
           ),
         ],
@@ -434,4 +347,9 @@ class _LibraryWidgetState extends State<LibraryWidget> {
     );
   }
 }
+
+
+
+
+
 
