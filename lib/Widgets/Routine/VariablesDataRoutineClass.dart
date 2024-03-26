@@ -34,6 +34,10 @@ class VariableData {
   Color colorIsPressed =   Color.fromARGB(255, 210, 181, 255);
   Color colorCurDay = Color.fromARGB(255, 210, 141, 255);
 
+  Color colorBorder = Color.fromARGB(255, 100, 100, 100);
+
+
+
   bool checkCorrectTime (var startHour, var startMinute, var endMinute, var endHour){
     bool checkCorrectTime = false;
     (startHour == endHour && startMinute == endMinute) ? checkCorrectTime = false : checkCorrectTime = true;
