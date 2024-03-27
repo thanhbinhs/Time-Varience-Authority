@@ -1,9 +1,7 @@
 
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:tva/Authentication/authentication.dart';
+
 
 TextField reusableTextField(String text,IconData icon, bool isPasswordType, TextEditingController controller){
   return TextField(

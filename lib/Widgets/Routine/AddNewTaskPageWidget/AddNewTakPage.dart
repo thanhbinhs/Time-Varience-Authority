@@ -4,7 +4,7 @@ import 'MainAddnewTaskPage.dart';
 
 
 class AddNewTaskPageWidget extends StatefulWidget{
-  int dayIsPressed;
+  final int dayIsPressed;
   AddNewTaskPageWidget({required this.dayIsPressed});
   @override
   State<AddNewTaskPageWidget> createState() => _AddNewTaskPageWidgetState();

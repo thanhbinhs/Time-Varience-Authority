@@ -10,62 +10,61 @@ class VariableData {
   double screenWidth() {
     return MediaQuery.of(context).size.width;
   }
-  List<Color> colorList = [
-    Color.fromARGB(255, 255, 230, 243),
-    Color.fromARGB(255, 255, 235, 190),
-    Color.fromARGB(255, 255, 255, 220),
-    Color.fromARGB(255, 210, 225, 210),
-    Color.fromARGB(255, 224, 255, 255),
-    Color.fromARGB(255, 238, 200, 248),
-    Color.fromARGB(255, 195, 195, 195),
-  ];
-  List<Color> colorListGradient = [
-    Color.fromARGB(255, 255, 150, 150),
-    Color.fromARGB(255, 255, 170, 150),
-    Color.fromARGB(255, 255, 220, 130),
-    Color.fromARGB(255, 190, 255, 190),
-    Color.fromARGB(255, 100, 200, 255),
-    Color.fromARGB(255, 248, 160, 248),
-    Color.fromARGB(255, 75, 75, 75),
-  ];
-  Color colorBackGround = Color.fromARGB(255, 230, 229, 250);
-  Color colorIsPressed =   Color.fromARGB(255, 210, 181, 255);
-  Color colorCurDay = Color.fromARGB(255, 210, 141, 255);
-  Color colorBorder = Color.fromARGB(255, 100, 100, 100);
+
+  Color colorBackGround = Color.fromARGB(255,227, 253, 253);
 
   List<String> songPath = [
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
+    'assets/Music/French79HomeTown',
+    'assets/Music/French79BetweenButtons',
+    'assets/Music/KidFrancescoliMoon',
+    'assets/Music/French79BurningLegend',
+    'assets/Music/French79Hero',
+    'assets/Music/FRENCH79Angel',
+    'assets/Music/French79DDROPP',
+    'assets/Music/French79LovinFeeling',
+  ];
+  List<String> pictureOfSongPath = [
+    'assets/PictureOfSong/Picture_0.jpg',
+    'assets/PictureOfSong/Picture_1.jpg',
+    'assets/PictureOfSong/Picture_2.jpg',
+    'assets/PictureOfSong/Picture_3.jpg',
+    'assets/PictureOfSong/Picture_4.jpg',
+    'assets/PictureOfSong/Picture_5.jpg',
+    'assets/PictureOfSong/Picture_6.jpg',
+    'assets/PictureOfSong/Picture_7.jpg',
   ];
   List<String> songName = [
-    'Song 1',
-    'Song 2',
-    'Song 3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
+    'HomeTown',
+    'Between Buttons',
+    'Moon',
+    'BurningLegend',
+    'Hero',
+    'Angel',
+    'DDROPP',
+    'Lovin - Feeling',
     '9',
+    '10',
   ];
   List<String> songInfor = [
-    '10 min',
-    '10 min',
-    '20 min',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
+    '5 min',
+    '5 min',
+    '6 min',
+    '5 min',
+    '3 min',
+    '6 min',
+    '5 min',
+    '3 min',
   ];
 
+  List<String> MotivationPicturePath = [
+    'assets/PicBGOfMotivation/Picture_0.jpg',
+    '5 min',
+    '6 min',
+    '5 min',
+    '3 min',
+    '6 min',
+    '5 min',
+    '3 min',
+  ];
 
 }

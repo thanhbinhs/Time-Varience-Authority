@@ -77,6 +77,14 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: const Offset(0, 2),
+                      )
+                    ],
                     color: Colors.white,
                   ),
                 ),
@@ -94,7 +102,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                   children: [
                     SizedBox(height: 20,),
                     Container(
-                      height: 35,
+                      height:  variableData.screenHeight() * 0.0436,
                       width: variableData.screenWidth() - 20,
                       // color: Colors.black,
                       child: ListView(
@@ -112,8 +120,8 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Container(
-                                height: 35,
-                                width: 50,
+                                height: variableData.screenHeight() * 0.0436,
+                                width: variableData.screenWidth()*0.13888,
                                 decoration: BoxDecoration(
                                   color: checkAll ? Color.fromARGB(255, 150, 220, 255) : null,
                                   borderRadius: BorderRadius.circular(15),
@@ -147,8 +155,8 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Container(
-                                height: 35,
-                                width: 90,
+                                height: variableData.screenHeight() * 0.0436,
+                                width: variableData.screenWidth()*0.25,
                                 decoration: BoxDecoration(
                                   color: checkDone ? Color.fromARGB(255, 150, 220, 255) : null,
                                   borderRadius: BorderRadius.circular(15),
@@ -183,8 +191,8 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Container(
-                                height: 35,
-                                width: 90,
+                                height: variableData.screenHeight() * 0.0436,
+                                width: variableData.screenWidth()*0.25,
                                 decoration: BoxDecoration(
                                   color: (checkDone == false && checkAll == false)  ? Color.fromARGB(255, 150, 220, 255) : null,
                                   borderRadius: BorderRadius.circular(15),
@@ -231,7 +239,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                   backgroundColor: Color.fromARGB(220, 100, 100, 100),
                                   foregroundColor: Colors.white,
                                   icon: Icons.edit,
-                                  label: 'Edit',
+                                  // label: 'Edit',
                                 ),
                                 SlidableAction(
                                   onPressed: (context) => {
@@ -240,169 +248,177 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                                   backgroundColor: Color.fromARGB(220, 255, 70, 70),
                                   foregroundColor: Colors.white,
                                   icon: Icons.delete_forever,
-                                  label: 'Delete',
+                                  // label: 'Delete',
                                 ),
                               ],
                             ),
                             child: Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 5),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                  BorderRadius.circular(20),
-                                  color:
-                                  variableData.colorList[data['color_id']],
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 10),
-                                    child: Container(
-                                      // color: Colors.yellow,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                  width: 50,
-                                                  // color: Colors.blue,
-                                                  child:
-                                                  IconButton(
-                                                    icon: Icon(
-                                                        Icons
-                                                            .abc),
-                                                    onPressed:
-                                                        () {
-
-                                                      // print("123");
-                                                    },
-                                                  )),
-                                              Container(
-                                                width: 200,
-                                                // color: Colors.red,
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      // color: Colors.brown,
-                                                      height: 25,
-                                                      child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        children: [
-                                                          Text(
-                                                            "Time: ",
-                                                            style:
-                                                            TextStyle(
-                                                              fontSize:
-                                                              13,
-                                                              // fontWeight: FontWeight.bold,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            "${variableData.ChangeFormTime(data['start_hour'],data['start_minute'],data['end_hour'],data['end_minute'],data['is_timeperiod'],data['is_timeperiod'])}",
-                                                          ),
-                                                        ],
+                              child:
+                              PhysicalModel(
+                                color: variableData.colorListGradient[data['color_id']],
+                                elevation: 2,
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: variableData.colorList[data['color_id']],
+                                  ),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 10),
+                                      child: Container(
+                                        // color: Colors.yellow,
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Container(
+                                                    width: variableData.screenWidth()*0.1111,
+                                                    // color: Colors.blue,
+                                                    child:
+                                                    IconButton(
+                                                      icon: Icon(
+                                                          Icons.abc
                                                       ),
-                                                    ),
-                                                    Container(
-                                                      // color: Colors.red,
-                                                      child: Text(
-                                                        data['name'],
-                                                        style:
-                                                        TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      // color: Colors.red,
-                                                      child: Text(
-                                                        data['decoration'],
-                                                        style:
-                                                        TextStyle(
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                width: 50,
-                                                // child: Icon(Icons.abc),
-                                                // color: Colors.black,
-                                                child: Center(
-                                                  child: Stack(
+                                                      onPressed:
+                                                          () {
+                                                          // print(variableData.screenWidth());
+                                                        // print("123");
+                                                      },
+                                                    )),
+                                                Container(
+                                                  width: variableData.screenWidth()*0.5555,
+                                                  // color: Colors.red,
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
                                                     children: [
-                                                      Center(
-                                                        child:
-                                                        InkWell(
-                                                          onTap:
-                                                              () {
-                                                            setState(
-                                                                    () {
-                                                                  // isCompleteTask = !isCompleteTask;
-                                                                  // print(isCompleteTask);
-                                                                });
-                                                          },
-                                                          child:
-                                                          Column(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            children: [
-                                                              SizedBox(
-                                                                height: 3,
+                                                      Container(
+                                                        // color: Colors.brown,
+                                                        height: variableData.screenHeight() * 0.03114,
+                                                        child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: [
+                                                            Text(
+                                                              "Time: ",
+                                                              style:
+                                                              TextStyle(
+                                                                fontSize:
+                                                                13,
+                                                                // fontWeight: FontWeight.bold,
                                                               ),
-                                                            ],
+                                                            ),
+                                                            Text(
+                                                              "${variableData.ChangeFormTime(data['start_hour'],data['start_minute'],data['end_hour'],data['end_minute'],data['is_timeperiod'],data['set_time'])}",
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        // color: Colors.red,
+                                                        child: Text(
+                                                          data['name'],
+                                                          style:
+                                                          TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight: FontWeight.bold,
                                                           ),
                                                         ),
                                                       ),
-                                                      Center(
-                                                        child:
-                                                        InkWell(
-                                                          onTap: () {
-
-                                                            setState(() {
-                                                              isComplete = !isComplete;
-                                                                  Database().updateTask(user.uid, data['id'], isComplete);
-                                                                });
-                                                          },
-                                                          child:
-                                                          data['is_done'] ?
-                                                          Container(
-                                                            height: 35,
-                                                            width: 35,
-                                                            // color: Colors.white,
-                                                            child:
-                                                            Icon(
-                                                              Icons.check_circle_rounded,
-                                                              size: 35,
-                                                              color: Color.fromARGB(255,94, 190, 109),
-                                                            ),
-                                                          ) :
-                                                          Container(
-                                                            height: 27,
-                                                            width: 27,
-                                                            decoration: BoxDecoration(
-                                                              shape: BoxShape.circle,
-                                                              border: Border.all(
-                                                                width: 2,
-                                                                color: Colors.grey,
-                                                              ),
-                                                            ),
+                                                      Container(
+                                                        // color: Colors.red,
+                                                        child: Text(
+                                                          data['decoration'],
+                                                          style:
+                                                          TextStyle(
+                                                            fontSize: 14,
                                                           ),
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                                Container(
+                                                  width: variableData.screenWidth()*0.13888,
+                                                  // child: Icon(Icons.abc),
+                                                  // color: Colors.black,
+                                                  child: Center(
+                                                    child: Stack(
+                                                      children: [
+                                                        Center(
+                                                          child:
+                                                          InkWell(
+                                                            onTap:
+                                                                () {
+                                                              setState(
+                                                                      () {
+                                                                    // isCompleteTask = !isCompleteTask;
+                                                                    // print(isCompleteTask);
+                                                                  });
+                                                            },
+                                                            child:
+                                                            Column(
+                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  height: 3,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Center(
+                                                          child:
+                                                          InkWell(
+                                                            onTap: () {
+
+                                                              setState(() {
+                                                                isComplete = !isComplete;
+                                                                    Database().updateTask(user.uid, data['id'], isComplete);
+                                                                  });
+                                                            },
+                                                            child:
+                                                            data['is_done'] ?
+                                                            Stack(
+                                                              children: [
+                                                                Container(
+                                                                  height: 35,
+                                                                  width: variableData.screenWidth()*0.09722,
+                                                                  // color: Colors.white,
+                                                                  child:
+                                                                  Icon(
+                                                                    Icons.check_circle_rounded,
+                                                                    size: 35,
+                                                                    color: Color.fromARGB(255,94, 190, 109),
+                                                                  ),
+                                                                ),
+                                                              ]
+                                                            ) :
+                                                            Container(
+                                                              height: variableData.screenHeight() * 0.03363,
+                                                              width: variableData.screenWidth()*0.075,
+                                                              decoration: BoxDecoration(
+                                                                shape: BoxShape.circle,
+                                                                border: Border.all(
+                                                                  width: 1.5,
+                                                                  color: Color.fromARGB(255, 100, 100, 100),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

@@ -33,14 +33,19 @@ class VariableData {
   Color colorBackGround = Color.fromARGB(255, 230, 229, 250);
   Color colorIsPressed =   Color.fromARGB(255, 210, 181, 255);
   Color colorCurDay = Color.fromARGB(255, 210, 141, 255);
-
   Color colorBorder = Color.fromARGB(255, 100, 100, 100);
 
 
 
-  bool checkCorrectTime (var startHour, var startMinute, var endMinute, var endHour){
+  bool checkCorrectTimeErrAsA (var startHour, var startMinute, var endHour, var endMinute){
     bool checkCorrectTime = false;
     (startHour == endHour && startMinute == endMinute) ? checkCorrectTime = false : checkCorrectTime = true;
+    return checkCorrectTime;
+  }
+
+  bool checkCorrectTimeErrNextDay (var startHour, var startMinute, var endHour, var endMinute){
+    bool checkCorrectTime = false;
+    ( (endMinute + endHour*60) > (startMinute + startHour * 60) && (endMinute + endHour*60) < (59 + 23*60) ) ?  checkCorrectTime = true : checkCorrectTime = false ;
     return checkCorrectTime;
   }
 
@@ -54,17 +59,16 @@ class VariableData {
   }
 
   String  ChangeFormTime(var startHour, var startMinute, var endHour, var endMinute,  bool isPressedTimeperiod,bool isSetTime){
-    if ( isPressedTimeperiod == true ){
+    if (isSetTime == true && isPressedTimeperiod == true ){
       return '${changeFormTimeTwoNumber(startHour)}:${changeFormTimeTwoNumber(startMinute)} to ${changeFormTimeTwoNumber(endHour)}:${changeFormTimeTwoNumber(endMinute)}';
     } else{
-      if(isPressedTimeperiod == false ){
+      if(isSetTime == true && isPressedTimeperiod == false ){
         return '${changeFormTimeTwoNumber(startHour)}:${changeFormTimeTwoNumber(startMinute)}';
       }
       else{
         return "No";
       }
     }
-
   }
 
 

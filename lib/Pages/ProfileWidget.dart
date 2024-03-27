@@ -73,10 +73,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         children: [
                                           Container(
                                             height:
-                                            variableData.screenHeight() *
-                                                0.0498,
-                                            width: variableData.screenWidth() *
-                                                0.41666,
+                                            variableData.screenHeight() * 0.0498,
+                                            width: variableData.screenWidth() * 0.41666,
                                             // color: Colors.blue,
                                             child: Row(
                                               mainAxisAlignment:

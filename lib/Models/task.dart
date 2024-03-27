@@ -10,6 +10,7 @@ class Task {
   int endHour;
   int endMinute;
   bool isTimePeriod;
+  bool setTime;
   bool isDone;
   int colorId;
 
@@ -23,6 +24,7 @@ class Task {
     required this.endHour,
     required this.endMinute,
     required this.isTimePeriod,
+    required this.setTime,
     required this.isDone,
     required this.colorId,
   });
@@ -37,6 +39,7 @@ class Task {
         endHour = documentSnapshot['end_hour'],
         endMinute = documentSnapshot['end_minute'],
         isTimePeriod = documentSnapshot['is_timeperiod'],
+        setTime = documentSnapshot['set_time'],
         isDone = documentSnapshot['is_done'],
         colorId = documentSnapshot['color_id'];
 
@@ -50,6 +53,7 @@ class Task {
         endHour = json['end_hour'],
         endMinute = json['end_minute'],
         isTimePeriod = json['is_timeperiod'],
+        setTime = json['set_time'],
         isDone = json['is_done'],
         colorId = json['color_id'];
 
@@ -64,6 +68,7 @@ class Task {
       'end_hour': endHour,
       'end_minute': endMinute,
       'is_timeperiod': isTimePeriod,
+      'set_time': setTime,
       'is_done': isDone,
       'color_id': colorId,
     };

@@ -6,12 +6,12 @@ import 'package:tva/Authentication/authentication.dart';
 import 'package:tva/Components/ReusableWidget.dart';
 import 'package:tva/Pages/HomePageWidget.dart';
 import 'package:tva/Pages/LoginPage.dart';
-import 'package:tva/Pages/ResetPasswordPage.dart';
-import 'package:tva/Pages/SignupPage.dart';
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-import 'package:tva/main.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:tva/Pages/ResetPasswordPage.dart';
+// import 'package:tva/Pages/SignupPage.dart';
+// import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+// import 'package:tva/main.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tva/Services/database_service.dart';
 
 class SignupPage extends StatefulWidget {

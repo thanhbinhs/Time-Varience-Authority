@@ -136,6 +136,15 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                                         decoration: BoxDecoration(
                                           color:   currentDateAsInt == index + 1 ? (variableData.colorCurDay) : (isPressedDayInWeek[index] || burnIndex == index ? variableData.colorIsPressed : variableData.colorBackGround),
                                           borderRadius: BorderRadius.circular(30),
+                                          boxShadow: [
+                                            if((isPressedDayInWeek[index] || burnIndex == index || currentDateAsInt == index + 1))
+                                             BoxShadow(
+                                               color: Colors.grey.withOpacity(0.2),
+                                               spreadRadius: 1,
+                                               blurRadius: 2,
+                                               offset: const Offset(0, 2),
+                                            )
+                                          ]
                                         ),
                                         child: Column(
                                           mainAxisAlignment: MainAxisAlignment.start,

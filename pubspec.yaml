@@ -81,7 +81,9 @@ flutter:
     - assets/RiveAssets/Icons.riv
     - assets/Images/apple.png
     - assets/Images/google.png
-    - assets/Music/au.mp3
+    - assets/Music/
+    - assets/PictureOfSong/
+    - assets/PicBGOfMotivation/
 
   #   - images/a_dot_ham.jpeg
 

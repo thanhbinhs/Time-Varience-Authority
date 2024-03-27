@@ -19,12 +19,12 @@ class _AddTimePageWidgetState extends State<AddTimePageWidget> {
   bool isTimePeriod = true;
   bool isPointTime = false;
   bool isSetime = false;
-  bool _showDialog = false;
+  bool _showDialogErrAsA = false;
+  bool _showDialogErrNextDay = false;
   @override
   void initState() {
     super.initState();
     now = DateTime.now();
-    // Gán giờ và phút từ thời gian hiện tại vào startHour và startMinute
     startHour = now.hour;
     startMinute = now.minute;
   }
@@ -33,8 +33,6 @@ class _AddTimePageWidgetState extends State<AddTimePageWidget> {
 
   @override
   Widget build(BuildContext context){
-
-
     VariableData variableData = VariableData(context);
     return Container(
           width: variableData.screenWidth(),
@@ -70,18 +68,24 @@ class _AddTimePageWidgetState extends State<AddTimePageWidget> {
                             ),
                             TextButton(
                               onPressed: (){
+                                isPressedTimeperiod ?
                                 setState(() {
-                                  _showDialog = true;
                                   isSetime = true;
-                                });
-                                variableData.checkCorrectTime(startHour, startMinute, endMinute, endHour) ?
-                                Navigator.pop(context, [startHour, startMinute,endHour,endMinute,isSetime,isPressedTimeperiod])
-                                    : Future.delayed(Duration(seconds: 2), () {
-                                  setState(() {
-                                    _showDialog = false;
-                                  });
+                                  _showDialogErrAsA = true;
+                                  _showDialogErrNextDay = true;
+                                })
+                                : setState(() {
+                                  isSetime = true;
+                                  Navigator.pop(context, [startHour, startMinute,endHour,endMinute,isSetime,isPressedTimeperiod]);
                                 });
 
+                                isPressedTimeperiod ? (variableData.checkCorrectTimeErrAsA(startHour, startMinute, endMinute, endHour)  && ((endMinute + endHour*60) > (startMinute + startHour * 60) && (endMinute + endHour*60) < (59 + 23*60) ))
+                                    ? Navigator.pop(context, [startHour, startMinute,endHour,endMinute,isSetime,isPressedTimeperiod])
+                                      : (variableData.checkCorrectTimeErrAsA(startHour, startMinute, endHour, endMinute) == false
+                                        ? Future.delayed(Duration(seconds: 2), () {setState(() {_showDialogErrAsA = false;_showDialogErrNextDay = false;});})
+                                          :   Future.delayed(Duration(seconds: 2), () {setState(() {_showDialogErrAsA = false;_showDialogErrNextDay = false;});
+                                            })
+                                              ) : null;
                               },
                               child: const Text(
                                 "Set Time",
@@ -112,31 +116,56 @@ class _AddTimePageWidgetState extends State<AddTimePageWidget> {
                                 Stack(
                                   children: [
                                     Center(
-                                      child:
-                                      AnimatedOpacity(
-                                        duration: Duration(seconds: 2),
-                                        opacity: _showDialog ? 0 : 1, // Fully visible if _showDialog is true, otherwise invisible
-                                        child:
-                                      Text(
-                                        isTimePeriod ?
-                                        "Do it at $startHour:$startMinute of the day "
-                                            : "Do it from $startHour:$startMinute to $endHour:$endMinute of the day",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 23,
-                                          fontWeight: FontWeight.bold,
+                                      child: AnimatedOpacity(
+                                      duration: Duration(seconds: 2),
+                                      opacity: _showDialogErrAsA ? 0 : 1,
+                                        child: Text(
+                                          isTimePeriod ?
+                                          "Do it at ${variableData.changeFormTimeTwoNumber(startHour)}:${variableData.changeFormTimeTwoNumber(startMinute)} of the day "
+                                              : "Do it from ${variableData.changeFormTimeTwoNumber(startHour)}:${variableData.changeFormTimeTwoNumber(startMinute)} to ${variableData.changeFormTimeTwoNumber(endHour)}:${variableData.changeFormTimeTwoNumber(endMinute)} of the day",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 23,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.center,
                                         ),
-                                        textAlign: TextAlign.center,
                                       ),
                                     ),
-                                    ),
+
                                     Center(
                                       child: AnimatedOpacity(
                                         duration: Duration(seconds: 2),
-                                        opacity: _showDialog ? 1 : 0, // Fully visible if _showDialog is true, otherwise invisible
-                                        child: CustomDialog(),
+                                        opacity: (_showDialogErrAsA || _showDialogErrNextDay) ? 1 : 0,
+                                        child: Container(
+                                          width: variableData.screenWidth() - 20,
+                                          height: variableData.screenHeight() * 0.15,
+                                          padding: EdgeInsets.all(20),
+                                          decoration: BoxDecoration(
+                                            color: Color.fromARGB(255, 255,50,50),
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
+                                          alignment: Alignment.center,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                !variableData.checkCorrectTimeErrAsA(startHour, startMinute, endMinute, endHour) ?
+                                                'Start time cannot be the same as end time. Please try resetting to another time !'
+                                                : "The time to finish the task must be before 00:00 pm, Please try resetting to another time !",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                    )
+
                                   ],
                                 ),
                               ),
@@ -154,7 +183,6 @@ class _AddTimePageWidgetState extends State<AddTimePageWidget> {
                                 ),
                                 child: Stack(
                                   children: [
-
                                     AnimatedPositioned(
                                       duration: Duration(milliseconds: 200),
                                       left: isPressedTimeperiod ? variableData.screenHeight()*0.2 : 0,
@@ -171,7 +199,6 @@ class _AddTimePageWidgetState extends State<AddTimePageWidget> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-
                                         InkWell(
                                           child: Container(
                                             // color: Colors.blue,
@@ -312,7 +339,13 @@ class _AddTimePageWidgetState extends State<AddTimePageWidget> {
                                       fontSize: 20,
                                     ),
                                   ),
-
+                                //   child: IconButton(
+                                //       onPressed: (){
+                                //         print("${variableData.checkCorrectTimeErrNextDay(startHour, startMinute, endHour, endMinute)}");
+                                //         print("${variableData.checkCorrectTimeErrAsA(startHour, startMinute, endHour, endMinute)}");
+                                //         },
+                                //       icon: Icon(Icons.abc)
+                                //   )
                                 ),
                               ),
 
@@ -404,33 +437,4 @@ class _AddTimePageWidgetState extends State<AddTimePageWidget> {
 }
 
 
-class CustomDialog extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    VariableData variableData = VariableData(context);
-    return Container(
-      width: variableData.screenWidth() - 20,
-      height: variableData.screenHeight() * 0.15,
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 255,50,50),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'Point time cannot be the same as Time preiod. Please try resetting to another time !',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+

@@ -4,21 +4,23 @@ import 'package:just_audio/just_audio.dart';
 import 'VariableDataLibraryClass.dart';
 
 
-class StopPauseNsilde extends StatefulWidget{
-  String nameSong;
-  String songInfor;
-  String songPath;
+class StopPauseNSlide extends StatefulWidget{
+  final String nameSong;
+  final String songInfor;
+  final String songPath;
+  final String pictureOfSongPath;
 
-  StopPauseNsilde({
+  StopPauseNSlide({
     required this.nameSong,
     required this.songInfor,
     required this.songPath,
+    required this.pictureOfSongPath,
   });
   @override
-  State<StopPauseNsilde> createState() => _StopPauseNsildeState();
+  State<StopPauseNSlide> createState() => _StopPauseNSildeState();
 }
 
-class _StopPauseNsildeState extends State<StopPauseNsilde> {
+class _StopPauseNSildeState extends State<StopPauseNSlide> {
 
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool _isPlaying = true;
@@ -41,19 +43,19 @@ class _StopPauseNsildeState extends State<StopPauseNsilde> {
 
   PageController _pageController = PageController(initialPage: 1, viewportFraction: 1);
   int _currentPage = 1;
-  bool _isPageBeingDragged = false;
+  final bool _isPageBeingDragged = false;
   Timer? _timer;
 
   void _startAutoScroll() {
-    _timer = Timer.periodic(Duration(seconds: 5), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (_) {
       if (!_isPageBeingDragged && _pageController.hasClients) {
-        _pageController.nextPage(duration: Duration(milliseconds: 1000), curve: Curves.ease);
+        _pageController.nextPage(duration: const Duration(milliseconds: 1000), curve: Curves.ease);
       }
     });
   }
 
   Future<void> _initAudioPlayer() async {
-    await _audioPlayer.setAsset('assets/Music/au.mp3');
+    await _audioPlayer.setAsset(widget.songPath);
     _audioPlayer.durationStream.listen((duration) {
       setState(() {
         _maxDuration = duration ?? Duration.zero;
@@ -91,15 +93,15 @@ class _StopPauseNsildeState extends State<StopPauseNsilde> {
   Widget build(BuildContext context){
     VariableData variableData = VariableData(context);
     return Container(
-      height: 70,
-      width: 200,
-      color: Colors.black,
+      height: variableData.screenHeight() * 0.0872,
+      width: variableData.screenWidth() * 0.2618,
+      // color: Colors.black,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 50,
-            color: Colors.blue,
+            height: variableData.screenHeight()*0.0622,
+            // color: Colors.blue,
             child: PageView.builder(
               controller: _pageController,
               scrollDirection: Axis.horizontal,
@@ -108,8 +110,8 @@ class _StopPauseNsildeState extends State<StopPauseNsilde> {
                     ? Padding(
                       padding: EdgeInsets.all(5),
                       child:   Container(
-                          height: 40,
-                          color: Colors.orange,
+                          height: variableData.screenHeight()*0.04983,
+                          // color: Colors.orange,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -117,10 +119,10 @@ class _StopPauseNsildeState extends State<StopPauseNsilde> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                    height: 20,
-                                    color: Colors.brown,
+                                    height: variableData.screenHeight()*0.02491,
+                                    // color: Colors.brown,
                                     child: Text(
-                                      "Song name",
+                                      widget.nameSong,
                                     ),
                                   ),
                                 ],
@@ -128,12 +130,12 @@ class _StopPauseNsildeState extends State<StopPauseNsilde> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    height: 15,
-                                    color: Colors.brown,
+                                  SizedBox(
+                                    height: variableData.screenHeight()*0.01868,
+                                    // color: Colors.brown,
                                     child: Text(
-                                      "10 min",
-                                      style: TextStyle(
+                                      widget.songInfor,
+                                      style: const TextStyle(
                                           fontSize: 10,
                                           color: Color.fromARGB(255, 50, 50, 50)
                                       ),
@@ -141,7 +143,6 @@ class _StopPauseNsildeState extends State<StopPauseNsilde> {
                                   ),
                                 ],
                               ),
-
                             ],
                           )
                       ),
@@ -163,10 +164,10 @@ class _StopPauseNsildeState extends State<StopPauseNsilde> {
             child: SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 trackHeight: 2,
-                thumbShape: RoundSliderThumbShape(
+                thumbShape: const RoundSliderThumbShape(
                   enabledThumbRadius: 5,
                 ),
-                overlayShape: RoundSliderOverlayShape(
+                overlayShape: const RoundSliderOverlayShape(
                   overlayRadius: 10,
                 ),
               ),
