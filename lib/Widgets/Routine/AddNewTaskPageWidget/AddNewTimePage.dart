@@ -55,7 +55,6 @@ class _AddTimePageWidgetState extends State<AddTimePageWidget> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-
                             IconButton(
                               onPressed: (){
                                 Navigator.pop(context);

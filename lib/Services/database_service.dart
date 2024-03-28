@@ -79,6 +79,63 @@ class Database {
     }
   }
 
+  Future<void> updateTaskEdit(
+      String uid,
+      String id,
+      String? name,
+      String? decoration,
+      int? startHour,
+      int? startMinute,
+      int? endHour,
+      int? endMinute,
+      bool? isTimePeriod,
+      bool? setTime,
+      int? colorId) async {
+    try {
+      final Map<String, dynamic> dataToUpdate = {};
+
+      if (name != null) {
+        dataToUpdate['name'] = name;
+      }
+      if (decoration != null) {
+        dataToUpdate['decoration'] = decoration;
+      }
+      // if (day != null) {
+      //   dataToUpdate['day'] = day;
+      // }
+      if (startHour != null) {
+        dataToUpdate['start_hour'] = startHour;
+      }
+      if (startMinute != null) {
+        dataToUpdate['start_minute'] = startMinute;
+      }
+      if (endHour != null) {
+        dataToUpdate['end_hour'] = endHour;
+      }
+      if (endMinute != null) {
+        dataToUpdate['end_minute'] = endMinute;
+      }
+      if (isTimePeriod != null) {
+        dataToUpdate['is_time_period'] = isTimePeriod;
+      }
+      if (setTime != null) {
+        dataToUpdate['set_time'] = setTime;
+      }
+      if (colorId != null) {
+        dataToUpdate['color_id'] = colorId;
+      }
+
+      await _firestore
+          .collection('users')
+          .doc(uid)
+          .collection('tasks')
+          .doc(id)
+          .update(dataToUpdate);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<void> delete(String uid, String id) async {
     try {
       await _firestore

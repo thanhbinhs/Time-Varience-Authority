@@ -3,7 +3,6 @@ import 'package:tva/Widgets/Library/MotivationWidget.dart';
 import '../Widgets/Library/MeditateWidget.dart';
 import '../Widgets/Library/VariableDataLibraryClass.dart';
 
-
 class LibraryWidget extends StatefulWidget {
   @override
   State<LibraryWidget> createState() => _LibraryWidgetState();
@@ -25,7 +24,7 @@ class _LibraryWidgetState extends State<LibraryWidget> {
               Container(
                 height: variableData.screenHeight() * 0.082,
                 width: variableData.screenWidth(),
-                color: Colors.white,
+                color: variableData.colorBackGround,
                 child: const Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -36,6 +35,7 @@ class _LibraryWidgetState extends State<LibraryWidget> {
                         fontSize: 18,
                       ),
                     ),
+                    SizedBox(height:10),
                   ],
                 ),
               ),
@@ -48,7 +48,7 @@ class _LibraryWidgetState extends State<LibraryWidget> {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                     children: [
-                      MeditateWidget(),
+                      // MeditateWidget(),
                       SizedBox(height: 20),
                       MotivationWidget(),
                     ],

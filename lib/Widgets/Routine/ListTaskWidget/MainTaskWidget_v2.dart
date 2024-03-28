@@ -10,6 +10,7 @@ import 'package:tva/src/actions.dart';
 import 'package:tva/src/slidable.dart';
 import '../VariablesDataRoutineClass.dart';
 import 'dart:core';
+import 'EditTaskPageWidget.dart';
 
 
 
@@ -235,6 +236,7 @@ class _MainTaskWidgetState extends State<MainTaskWidget> {
                               children: [
                                 SlidableAction(
                                   onPressed: (context) => {
+                                    // EditTaskPageVer1()
                                   },
                                   backgroundColor: Color.fromARGB(220, 100, 100, 100),
                                   foregroundColor: Colors.white,
