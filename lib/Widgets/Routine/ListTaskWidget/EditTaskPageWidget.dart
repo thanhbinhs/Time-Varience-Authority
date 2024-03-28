@@ -205,7 +205,7 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                             widget.endMinute,
                             widget.isTimePeriod,
                             widget.setTime,
-                            colorID);
+                            widget.colorId);
                         Future.delayed(Duration(milliseconds: 300), () {
                           Navigator.pop(context);
                         });
@@ -278,7 +278,7 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                                     widget.colorId = i;
                                     colorTheme = variableData.colorList[i];
                                     colorThemeGradient =
-                                    variableData.colorListGradient[i];
+                                        variableData.colorListGradient[i];
                                     BurnIndex = -1;
                                   });
                                 },
@@ -287,7 +287,7 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                                     PhysicalModel(
                                       elevation: 2,
                                       shadowColor:
-                                      Color.fromARGB(255, 245, 245, 245),
+                                          Color.fromARGB(255, 245, 245, 245),
                                       color: Colors.blue,
                                       shape: BoxShape.circle,
                                       child: SizedBox(
@@ -344,15 +344,15 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                                 // color: Colors.green,
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
                                       width:
-                                      variableData.screenHeight() * 0.2616,
+                                          variableData.screenHeight() * 0.2616,
                                       // color: Colors.blue,
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                         children: [
                                           Text(
                                             'Date: ${widget.day}',
@@ -365,11 +365,11 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                                     ),
                                     Container(
                                       width:
-                                      variableData.screenHeight() * 0.0436,
+                                          variableData.screenHeight() * 0.0436,
                                       // color: Colors.green,
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.end,
+                                            MainAxisAlignment.end,
                                         children: [
                                           Icon(Icons.calendar_today),
                                         ],
@@ -396,15 +396,15 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                                 // color: Colors.green,
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
                                       width:
-                                      variableData.screenHeight() * 0.2616,
+                                          variableData.screenHeight() * 0.2616,
                                       // color: Colors.blue,
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                         children: [
                                           Text('Time: '),
                                           Text(
@@ -418,11 +418,11 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                                     ),
                                     Container(
                                       width:
-                                      variableData.screenHeight() * 0.0436,
+                                          variableData.screenHeight() * 0.0436,
                                       // color: Colors.green,
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.end,
+                                            MainAxisAlignment.end,
                                         children: [
                                           Icon(
                                             Icons.alarm_rounded,
@@ -457,15 +457,15 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                                 // color: Colors.green,
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
                                       width:
-                                      variableData.screenHeight() * 0.2616,
+                                          variableData.screenHeight() * 0.2616,
                                       // color: Colors.blue,
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                         children: [
                                           Text(
                                             'Reminder: ',
@@ -478,11 +478,11 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                                     ),
                                     Container(
                                       width:
-                                      variableData.screenHeight() * 0.0436,
+                                          variableData.screenHeight() * 0.0436,
                                       // color: Colors.green,
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.end,
+                                            MainAxisAlignment.end,
                                         children: [
                                           Icon(
                                             Icons.doorbell_outlined,
@@ -511,15 +511,15 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                                 // color: Colors.green,
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
                                       width:
-                                      variableData.screenHeight() * 0.2616,
+                                          variableData.screenHeight() * 0.2616,
                                       // color: Colors.blue,
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                         children: [
                                           Text(
                                             'Tag: ',
@@ -532,11 +532,11 @@ class _EditTaskPageWidgetState extends State<EditTaskPageWidget> {
                                     ),
                                     Container(
                                       width:
-                                      variableData.screenHeight() * 0.0436,
+                                          variableData.screenHeight() * 0.0436,
                                       // color: Colors.green,
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.end,
+                                            MainAxisAlignment.end,
                                         children: [
                                           Icon(
                                             Icons.discount_outlined,

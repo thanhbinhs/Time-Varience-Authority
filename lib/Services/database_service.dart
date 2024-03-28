@@ -9,7 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 class Database {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> saveUserInformation(String userName, String email) async {
+  Future<void> saveUserInformation(
+      String userName, String email, String password) async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
 
     FirebaseAuth auth = FirebaseAuth.instance;
@@ -19,9 +20,10 @@ class Database {
     return users
         .doc(uid) // Sử dụng UID làm key để dễ dàng truy cập và quản lý sau này
         .set({
-      'user_name': userName, // Tên người dùng
-      'email': email, // Email
-    })
+          'user_name': userName, // Tên người dùng
+          'email': email,
+          'password': password, // Email
+        })
         .then((value) => print("User Information Added"))
         .catchError((error) => print("Failed to add user: $error"));
   }

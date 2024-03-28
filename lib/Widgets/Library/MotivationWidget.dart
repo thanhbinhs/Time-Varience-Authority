@@ -1,22 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'CategorieNThemeWidget.dart';
 import 'VariableDataLibraryClass.dart';
 import 'dart:async';
 
-class MotivationWidget extends StatefulWidget{
-
+class MotivationWidget extends StatefulWidget {
   @override
   State<MotivationWidget> createState() => _MotivationWidgetState();
 }
 
 class _MotivationWidgetState extends State<MotivationWidget> {
-
   int Categories = 0;
   int Themes = 0;
-
-
 
   @override
   void initState() {
@@ -32,7 +27,8 @@ class _MotivationWidgetState extends State<MotivationWidget> {
     });
   }
 
-  PageController _pageController = PageController(initialPage: 1, viewportFraction: 1);
+  PageController _pageController =
+      PageController(initialPage: 1, viewportFraction: 1);
   int _currentPage = 1;
   final bool _isPageBeingDragged = false;
   Timer? _timer;
@@ -40,14 +36,11 @@ class _MotivationWidgetState extends State<MotivationWidget> {
   void _startAutoScroll() {
     _timer = Timer.periodic(const Duration(seconds: 5), (_) {
       if (!_isPageBeingDragged && _pageController.hasClients) {
-        _pageController.nextPage(duration: const Duration(milliseconds: 1000), curve: Curves.ease);
+        _pageController.nextPage(
+            duration: const Duration(milliseconds: 1000), curve: Curves.ease);
       }
     });
   }
-
-
-
-
 
   @override
   void dispose() {
@@ -55,23 +48,23 @@ class _MotivationWidgetState extends State<MotivationWidget> {
     super.dispose();
   }
 
-
-
-
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     VariableData variableData = VariableData(context);
     return InkWell(
-      onTap: (){
+      onTap: () {
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => CategorieNTheme(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                CategorieNTheme(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
               const begin = Offset(1.0, 0.0);
               const end = Offset.zero;
               const curve = Curves.ease;
-              var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+              var tween =
+                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
               var offsetAnimation = animation.drive(tween);
               return SlideTransition(
                 position: offsetAnimation,
@@ -79,12 +72,10 @@ class _MotivationWidgetState extends State<MotivationWidget> {
               );
             },
           ),
-
         );
-
       },
       child: Container(
-        height: variableData.screenHeight()*0.39,
+        height: variableData.screenHeight() * 0.39,
         width: variableData.screenWidth(),
         decoration: BoxDecoration(
           color: variableData.colorBackGround,
@@ -101,7 +92,7 @@ class _MotivationWidgetState extends State<MotivationWidget> {
         child: Stack(
           children: [
             Container(
-              height: variableData.screenHeight()*0.39,
+              height: variableData.screenHeight() * 0.39,
               width: variableData.screenWidth(),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -115,104 +106,105 @@ class _MotivationWidgetState extends State<MotivationWidget> {
                 ),
               ),
             ),
-
             Padding(
               padding: EdgeInsets.all(15),
               child: Container(
-                  height: variableData.screenHeight()*0.1,
-                  // color: Colors.green,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: variableData.screenWidth()*0.82,
-                        // color: Colors.yellow,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
+                height: variableData.screenHeight() * 0.1,
+                // color: Colors.green,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: variableData.screenWidth() * 0.82,
+                      // color: Colors.yellow,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
                           Container(
-                                height: variableData.screenHeight()*0.0498,
-                                // color: Colors.grey,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            height: variableData.screenHeight() * 0.0498,
+                            // color: Colors.grey,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    const Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          'Motivation',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 23,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
+                                    Text(
+                                      'Motivation',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 23,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                            width: variableData.screenWidth()*0.111,
-                                            // color: Colors.yellow,
-                                            child: const Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                SizedBox(width: 1.5,),
-                                                Text("All",
-                                                style: TextStyle(color: Colors.white),
-                                                ),
-                                                Icon(
-                                                  Icons.arrow_forward_ios_rounded,
-                                                  size: 10,
-                                                  color: Colors.white,
-                                                ),
-                                              ],
-                                            )
-                                        ),
-                                        SizedBox(height: 5,),
-                                      ],
-                                    )
                                   ],
                                 ),
-                              ),
-                          ],
-                        ),
-                      ),
-
-                    ],
-                  ),
-                ),
-              ),
-            Container(
-              child: PageView.builder(
-                  controller: _pageController,
-                  itemBuilder: (context, index) {
-                    final int newIndex = index % 5;
-                    return Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Container(
-                        child: Center(
-                          child: Text(
-                            variableData.motivationString[Categories][newIndex],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                        width:
+                                            variableData.screenWidth() * 0.111,
+                                        // color: Colors.yellow,
+                                        child: const Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SizedBox(
+                                              width: 1.5,
+                                            ),
+                                            Text(
+                                              "All",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            Icon(
+                                              Icons.arrow_forward_ios_rounded,
+                                              size: 10,
+                                              color: Colors.white,
+                                            ),
+                                          ],
+                                        )),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
                           ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+                child: PageView.builder(
+              controller: _pageController,
+              itemBuilder: (context, index) {
+                final int newIndex = index % 5;
+                return Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Container(
+                    child: Center(
+                      child: Text(
+                        variableData.motivationString[Categories][newIndex],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
                         ),
                       ),
-                    );
-                  },
-                )
-            ),
-            ],
-          ),
+                    ),
+                  ),
+                );
+              },
+            )),
+          ],
+        ),
       ),
     );
   }
 }
-
-
-

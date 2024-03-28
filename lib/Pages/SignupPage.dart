@@ -75,7 +75,8 @@ class _SignupPageState extends State<SignupPage> {
                               email: _email.text, password: _password.text)
                           .then((value) {
                         print("Created New Account");
-                        Database().saveUserInformation(_userName.text, _email.text);
+                        Database().saveUserInformation(
+                            _userName.text, _email.text, _password.text);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
